@@ -33,8 +33,9 @@
        render: function() {
          return (
            <tr onClick={this.props.on_click}>
-             <td>{this.props.from}</td>
              <td>{this.props.subject}</td>
+             <td>{this.props.from}</td>
+             <td>{this.props.to}</td>
            </tr>
          );
        }
@@ -47,6 +48,7 @@
            return (
              <EmailListItem key={mail.id}
                             from={mail.from}
+                            to={mail.to}
                             subject={mail.subject}
                             on_click={select_fn.bind(this, mail.id)} />
            );
@@ -56,8 +58,9 @@
            <table className="email-list">
              <thead>
                <tr>
-                 <th>From</th>
                  <th>Subject</th>
+                 <th>From</th>
+                 <th>To</th>
                </tr>
              </thead>
              <tbody>
