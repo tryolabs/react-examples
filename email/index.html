@@ -8,7 +8,6 @@
     <title>Email Client</title>
   </head>
   <body>
-    <div id="content"></div>
     <script type="text/jsx">
      var Email = React.createClass({
        render: function() {
@@ -102,7 +101,7 @@
          }
 
          return (
-           <div className="mailbox">
+           <div>
              <EmailList emails={this.props.emails}
                         select_email={this.select_email} />
              {selected_email}
@@ -156,7 +155,9 @@
            <div className="app">
              <MailboxList mailboxes={this.props.mailboxes}
                           select_mailbox={this.select_mailbox} />
-             {selected_mailbox}
+             <div className="mailbox">
+               {selected_mailbox}
+             </div>
            </div>
          );
        }
@@ -187,7 +188,7 @@
 
      React.render(
        <App mailboxes={fixtures} />,
-       document.getElementById('content')
+       document.body
      );
     </script>
   </body>
