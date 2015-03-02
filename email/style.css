@@ -36,22 +36,27 @@ body {
 /* Mailbox list style */
 
 .mailboxes {
+    padding: 35px 65px;
+    margin: 0 auto;
+
+    list-style-type: none;
+    font-size: 1.2em;
+    border-right: 2px solid black;
+}
+
+/* Mailbox style */
+
+.mailbox {
 }
 
 /* Email table style */
 
 .email-list {
     width: 100%;
-    border: 1px solid #ddd;
 }
 
 .email-list tbody > tr:nth-child(odd) {
     background: #f9f9f9;
-}
-
-/* Mailbox style */
-
-.mailbox {
 }
 
 /* 'None selected' message */
