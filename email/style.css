@@ -33,6 +33,14 @@ body {
     min-height: 100vh;
 }
 
+.mailbox .email-list {
+    min-height: 50%;
+}
+
+.mailbox .emails {
+    min-height: 50%;
+}
+
 /* Mailbox list style */
 
 .mailboxes {
@@ -51,12 +59,52 @@ body {
 
 /* Email table style */
 
-.email-list {
+table {
     width: 100%;
+
+    border-collapse: collapse;
+    border-style: hidden;
 }
 
-.email-list tbody > tr:nth-child(odd) {
+.email-list td, .email-list th {
+    border: 1px solid black;
+}
+
+.email-list tbody tr:nth-child(odd) {
     background: #f9f9f9;
+}
+
+.email-list td {
+    padding-left: 20px;
+}
+
+/* Email style */
+
+.email-viewer {
+    border-top: 1px solid black;
+}
+
+.email {
+    margin: 25px 0;
+    padding: 25px;
+}
+
+.email dt {
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.email dd {
+    margin-bottom: 7px;
+}
+
+.email dl {
+    padding-bottom: 15px;
+}
+
+.email .body {
+    padding-top: 15px;
+    border-top: 1px solid black;
 }
 
 /* 'None selected' message */
