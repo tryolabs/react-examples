@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://fb.me/react-0.12.2.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Mailbox</title>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script type="text/jsx">
+     var Email = React.createClass({
+       render: function() {
+         return (
+           <div className="email">
+             <dl className="meta">
+               <dt>From</dt>
+               <dd>{this.props.from}</dd>
+
+               <dt>To</dt>
+               <dd>{this.props.to}</dd>
+
+               <dt>Subject</dt>
+               <dd>{this.props.subject}</dd>
+             </dl>
+             <div className="body" dangerouslySetInnerHTML={{__html: this.props.body}}></div>
+           </div>
+         );
+       }
+     });
+
+     var EmailListItem = React.createClass({
+       render: function() {
+         return (
+           <tr onClick={this.props.on_click}>
+             <td>{this.props.from}</td>
+             <td>{this.props.subject}</td>
+           </tr>
+         );
+       }
+     });
+
+     var EmailList = React.createClass({
+       render: function() {
+         var select_fn = this.props.select_email;
+         var email_list = this.props.emails.map(function(mail) {
+           return (
+             <EmailListItem key={mail.id}
+                            from={mail.from}
+                            subject={mail.subject}
+                            on_click={select_fn.bind(this, mail.id)} />
+           );
+         });
+
+         return (
+           <table className="email-list">
+             <thead>
+               <th>From</th>
+               <th>Subject</th>
+             </thead>
+             <tbody>
+               {email_list}
+             </tbody>
+           </table>
+         );
+       }
+     });
+
+     var NoneSelected = React.createClass({
+       render: function() {
+         return (
+           <div className="none-selected">
+             <span>No {this.props.text} selected.</span>
+           </div>
+         );
+       }
+     });
+
+     var Mailbox = React.createClass({
+       getInitialState: function(){
+         return { email_id: null };
+       },
+
+       select_email: function(id) {
+         this.setState({ email_id: id });
+       },
+
+       render: function() {
+         var email_id = this.state.email_id;
+         if (email_id) {
+           var mail = this.props.emails.filter(function(mail) {
+             return mail.id == email_id;
+           })[0];
+           selected_email = <Email id={mail.id}
+                                   from={mail.from}
+                                   to={mail.to}
+                                   subject={mail.subject}
+                                   body={mail.body} />;
+         } else {
+           selected_email = <NoneSelected text="email" />;
+         }
+
+         return (
+           <div className="mailbox">
+             <EmailList emails={this.props.emails}
+                        select_email={this.select_email} />
+             {selected_email}
+           </div>
+         );
+       }
+     });
+
+     var MailboxList = React.createClass({
+       render: function() {
+         var select_fn = this.props.select_mailbox;
+         var mailbox_list = this.props.mailboxes.map(function(mailbox) {
+           return (
+             <li key={mailbox.id}
+                 onClick={select_fn.bind(this, mailbox.id)}>
+               {mailbox.name}
+             </li>
+           );
+         });
+
+         return (
+           <ul className="mailboxes">
+             {mailbox_list}
+           </ul>
+         );
+       }
+     });
+
+     var App = React.createClass({
+       getInitialState: function(){
+         return { mailbox_id: null };
+       },
+
+       select_mailbox: function(id) {
+         this.setState({ mailbox_id: id });
+       },
+
+       render: function() {
+         var mailbox_id = this.state.mailbox_id;
+         if (mailbox_id) {
+           var mailbox = this.props.mailboxes.filter(function(mailbox) {
+             return mailbox.id == mailbox_id;
+           })[0];
+           selected_mailbox = <Mailbox key={mailbox.id}
+                                       emails={mailbox.emails} />;
+         } else {
+           selected_mailbox = <NoneSelected text="mailbox" />;
+         }
+
+         return (
+           <div className="app">
+             <MailboxList mailboxes={this.props.mailboxes}
+                          select_mailbox={this.select_mailbox} />
+             {selected_mailbox}
+           </div>
+         );
+       }
+     });
+
+     var fixtures = [
+       {
+         id: 1,
+         name: "Inbox",
+         emails: [
+           {
+             id: 1,
+             from: "joe@tryolabs.com",
+             to: "fernando@tryolabs.com",
+             subject: "Meeting",
+             body: "hi"
+           },
+           {
+             id: 2,
+             from: "jane@tryolabs.com",
+             to: "fernando@tryolabs.com",
+             subject: "Project planning",
+             body: "hello"
+           }
+         ]
+       }
+     ];
+
+     React.render(
+       <App mailboxes={fixtures} />,
+       document.getElementById('content')
+     );
+    </script>
+  </body>
+</html>
