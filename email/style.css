@@ -12,7 +12,7 @@
 
 body {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 
     min-height: 100vh;
 }
@@ -24,21 +24,39 @@ body {
 .mailboxes {
     width: 20%;
     float: left;
+    min-height: 100vh;
 }
 
 .mailbox {
     width: 80%;
     float: left;
+    min-height: 100vh;
 }
 
 /* Mailbox list style */
 
 .mailboxes {
-    background: #ccc;
+}
+
+/* Email table style */
+
+.email-list {
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+.email-list tbody > tr:nth-child(odd) {
+    background: #f9f9f9;
 }
 
 /* Mailbox style */
 
 .mailbox {
-    background: #eee;
+}
+
+/* 'None selected' message */
+
+.none-selected {
+    text-align: center;
+    background: #f9f9f9;
 }
