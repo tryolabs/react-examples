@@ -70,7 +70,7 @@ table {
     border: 1px solid black;
 }
 
-.email-list tbody tr:nth-child(odd) {
+.email-list tbody tr:nth-child(even) {
     background: #f9f9f9;
 }
 
