@@ -106,7 +106,9 @@
            <div>
              <EmailList emails={this.props.emails}
                         select_email={this.select_email} />
-             {selected_email}
+             <div className="email-viewer">
+               {selected_email}
+             </div>
            </div>
          );
        }
@@ -183,6 +185,19 @@
              to: "fernando@tryolabs.com",
              subject: "Project planning",
              body: "hello"
+           }
+         ]
+       },
+       {
+         id: 2,
+         name: "Spam",
+         emails: [
+           {
+             id: 3,
+             from: "nigerian.prince@gmail.com",
+             to: "fernando@tryolabs.com",
+             subject: "Obivous 419 scam",
+             body: "hi"
            }
          ]
        }
