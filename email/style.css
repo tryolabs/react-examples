@@ -1,3 +1,44 @@
-.email-list {
-    border: 1px solid black;
+/* Reset */
+
+*, *:after, *:before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Layout */
+
+body {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 100vh;
+}
+
+.app {
+    flex: 1;
+}
+
+.mailboxes {
+    width: 20%;
+    float: left;
+}
+
+.mailbox {
+    width: 80%;
+    float: left;
+}
+
+/* Mailbox list style */
+
+.mailboxes {
+    background: #ccc;
+}
+
+/* Mailbox style */
+
+.mailbox {
+    background: #eee;
 }
