@@ -130,6 +130,9 @@
              <li className="list-group-item"
                  key={mailbox.id}
                  onClick={select_fn.bind(this, mailbox.id)}>
+               <span className="badge">
+                 {mailbox.emails.length}
+               </span>
                {mailbox.name}
              </li>
            );
