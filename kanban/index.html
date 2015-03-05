@@ -12,10 +12,6 @@
   <body>
     <script type="text/jsx">
      var Task = React.createClass({
-       getInitialState: function(){
-         return { desc: "" };
-       },
-
        render: function() {
          return (
            <li className="task">
@@ -26,10 +22,6 @@
      });
 
      var List = React.createClass({
-       getInitialState: function(){
-         return { tasks: [] };
-       },
-
        render: function() {
          var task_list = this.props.tasks.map(function(task) {
            return (
