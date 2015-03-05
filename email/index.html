@@ -174,7 +174,11 @@
              <MailboxList mailboxes={this.props.mailboxes}
                           select_mailbox={this.select_mailbox} />
              <div className="mailbox col-md-10">
-               {selected_mailbox}
+               <div className="panel panel-default">
+                 <div className="panel-body">
+                   {selected_mailbox}
+                 </div>
+               </div>
              </div>
            </div>
          );
