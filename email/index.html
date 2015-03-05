@@ -18,7 +18,7 @@
        render: function() {
          return (
            <div className="email">
-             <dl className="meta">
+             <dl className="meta dl-horizontal">
                <dt>From</dt>
                <dd>{this.props.from}</dd>
 
@@ -60,7 +60,7 @@
          });
 
          return (
-           <table className="email-list">
+           <table className="email-list table table-striped table-condensed">
              <thead>
                <tr>
                  <th>Subject</th>
@@ -127,7 +127,8 @@
          var select_fn = this.props.select_mailbox;
          var mailbox_list = this.props.mailboxes.map(function(mailbox) {
            return (
-             <li key={mailbox.id}
+             <li className="list-group-item"
+                 key={mailbox.id}
                  onClick={select_fn.bind(this, mailbox.id)}>
                {mailbox.name}
              </li>
@@ -135,9 +136,11 @@
          });
 
          return (
-           <ul className="mailboxes">
-             {mailbox_list}
-           </ul>
+           <div className="col-md-2">
+             <ul className="mailboxes list-group">
+               {mailbox_list}
+             </ul>
+           </div>
          );
        }
      });
@@ -164,10 +167,10 @@
          }
 
          return (
-           <div className="app">
+           <div className="app row">
              <MailboxList mailboxes={this.props.mailboxes}
                           select_mailbox={this.select_mailbox} />
-             <div className="mailbox">
+             <div className="mailbox col-md-10">
                {selected_mailbox}
              </div>
            </div>
