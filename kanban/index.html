@@ -11,6 +11,24 @@
   </head>
   <body>
     <script type="text/jsx">
+     var Task = React.createClass({
+       getInitialState: function(){
+         return { desc: "" };
+       },
+     });
+
+     var List = React.createClass({
+       getInitialState: function(){
+         return { tasks: [] };
+       },
+     });
+
+     var App = React.createClass({
+       getInitialState: function(){
+         return { lists: [] };
+       },
+     });
+
      var fixtures = {
        lists: [
          {
