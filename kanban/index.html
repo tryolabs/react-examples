@@ -21,20 +21,34 @@
        }
      });
 
-     var List = React.createClass({
+     var TaskList = React.createClass({
        render: function() {
          var task_list = this.props.tasks.map(function(task) {
            return (
              <Task desc={task.desc} />
            );
          });
+         return (
+           <ul className="task-list">
+             {task_list}
+           </ul>
+         );
        }
      });
 
      var App = React.createClass({
-       getInitialState: function(){
-         return { lists: [] };
-       },
+       render: function() {
+         var lists = this.props.lists.map(function(list) {
+           return (
+             <TaskList tasks={list.tasks} />
+           );
+         });
+         return (
+           <div className="lists">
+             {lists}
+           </div>
+         );
+       }
      });
 
      var fixtures = {
@@ -62,6 +76,7 @@
                text: "Learn the basics of React"
              }
            ]
+         }
        ]
      }
     </script>
