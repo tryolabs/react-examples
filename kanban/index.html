@@ -31,17 +31,16 @@
        },
 
        deleteTask: function(id) {
-         var new_tasks = this.state.tasks.filter(function(task) {
-           return task.id != id;
-         });
-         this.setState({ tasks: new_tasks });
+         var tasks = this.state.tasks;
+         tasks.splice(id, 1);
+         this.setState({ tasks: tasks });
        },
 
        render: function() {
          var self = this;
-         var task_list = this.state.tasks.map(function(task) {
+         var task_list = this.state.tasks.map(function(task, index) {
            return (
-             <Task key={task.id}
+             <Task key={index}
                    text={task.text}
                    deleteTask={self.deleteTask.bind(self, task.id)} />
            );
@@ -83,11 +82,9 @@
            name: "Todo",
            tasks: [
              {
-               id: 2,
                text: "Write example React app"
              },
              {
-               id: 3,
                text: "Write documentation"
              }
            ]
@@ -97,7 +94,6 @@
            name: "Done",
            tasks: [
              {
-               id: 1,
                text: "Learn the basics of React"
              }
            ]
