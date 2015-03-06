@@ -15,7 +15,7 @@
        render: function() {
          return (
            <li className="task">
-             {this.props.desc}
+             {this.props.text}
            </li>
          );
        }
@@ -25,7 +25,7 @@
        render: function() {
          var task_list = this.props.tasks.map(function(task) {
            return (
-             <Task desc={task.desc} />
+             <Task text={task.text} />
            );
          });
          return (
@@ -78,7 +78,12 @@
            ]
          }
        ]
-     }
+     };
+
+     React.render(
+       <App lists={fixtures.lists} />,
+       document.body
+     );
     </script>
   </body>
 </html>
