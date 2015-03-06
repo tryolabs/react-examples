@@ -26,13 +26,20 @@
      });
 
      var TaskList = React.createClass({
+       getInitialState: function() {
+         return { tasks: this.props.tasks };
+       },
+
        deleteTask: function(id) {
-         console.log(id);
+         var new_tasks = this.state.tasks.filter(function(task) {
+           return task.id != id;
+         });
+         this.setState({ tasks: new_tasks });
        },
 
        render: function() {
          var self = this;
-         var task_list = this.props.tasks.map(function(task) {
+         var task_list = this.state.tasks.map(function(task) {
            return (
              <Task key={task.id}
                    text={task.text}
