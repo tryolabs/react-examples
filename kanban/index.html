@@ -26,11 +26,23 @@
      });
 
      var AddTask = React.createClass({
+       getInitialState: function() {
+         return { text: "" };
+       },
+
+       handleChange: function(event) {
+         this.setState({text: event.target.value});
+       },
+
        render: function() {
          return (
            <div className="add-task">
-             <input type="text" />
-             <button type="button" onClick={this.props.addTask1}>Add</button>
+             <input type="text"
+                    value={this.state.text}
+                    onChange={this.handleChange} />
+             <button type="button" onClick={this.props.addTask.bind(null, this.state.text)}>
+               Add
+             </button>
            </div>
          );
        }
@@ -45,6 +57,10 @@
          var tasks = this.state.tasks;
          tasks.splice(id, 1);
          this.setState({ tasks: tasks });
+       },
+
+       addTask: function(text) {
+         console.log("Adding " + text);
        },
 
        render: function() {
@@ -64,7 +80,7 @@
              <ul className="list-tasks">
                {task_list}
              </ul>
-             <AddTask />
+             <AddTask addTask={self.addTask} />
            </div>
          );
        }
