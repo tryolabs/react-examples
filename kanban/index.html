@@ -29,9 +29,14 @@
            );
          });
          return (
-           <ul className="task-list">
-             {task_list}
-           </ul>
+           <div className="task-lists">
+             <h1 className="list-title">
+               {this.props.name}
+             </h1>
+             <ul className="list-tasks">
+               {task_list}
+             </ul>
+           </div>
          );
        }
      });
@@ -40,7 +45,7 @@
        render: function() {
          var lists = this.props.lists.map(function(list) {
            return (
-             <TaskList tasks={list.tasks} />
+             <TaskList name={list.name} tasks={list.tasks} />
            );
          });
          return (
