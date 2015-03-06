@@ -25,10 +25,13 @@
        }
      });
 
-     var NewTask = React.createClass({
+     var AddTask = React.createClass({
        render: function() {
          return (
-           <input type="text" />
+           <div className="add-task">
+             <input type="text" />
+             <button type="button" onClick={this.props.addTask1}>Add</button>
+           </div>
          );
        }
      });
@@ -61,7 +64,7 @@
              <ul className="list-tasks">
                {task_list}
              </ul>
-             <NewTask />
+             <AddTask />
            </div>
          );
        }
