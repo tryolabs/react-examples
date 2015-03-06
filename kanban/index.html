@@ -60,9 +60,9 @@
 
      var App = React.createClass({
        render: function() {
-         var lists = this.props.lists.map(function(list) {
+         var lists = this.props.lists.map(function(list, index) {
            return (
-             <TaskList key={list.id}
+             <TaskList key={index}
                        name={list.name}
                        tasks={list.tasks} />
            );
@@ -78,7 +78,6 @@
      var fixtures = {
        lists: [
          {
-           id: 1,
            name: "Todo",
            tasks: [
              {
@@ -90,7 +89,6 @@
            ]
          },
          {
-           id: 2,
            name: "Done",
            tasks: [
              {
