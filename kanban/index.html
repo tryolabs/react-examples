@@ -25,6 +25,14 @@
        }
      });
 
+     var NewTask = React.createClass({
+       render: function() {
+         return (
+           <input type="text" />
+         );
+       }
+     });
+
      var TaskList = React.createClass({
        getInitialState: function() {
          return { tasks: this.props.tasks };
@@ -53,6 +61,7 @@
              <ul className="list-tasks">
                {task_list}
              </ul>
+             <NewTask />
            </div>
          );
        }
