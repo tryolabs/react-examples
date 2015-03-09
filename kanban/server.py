@@ -59,24 +59,22 @@ def get_board():
     return json.dumps(DB.to_dict())
 
 
-@app.route("/api/:list/task", methods=["PUT"])
-def add_task(list_id):
-    """Add a task to a list."""
-    try:
-        DB.lists[list_id].tasks.append([Task(name=request.form.get("text"))])
-    except IndexError:
-        return json.dumps({"status": "FAIL"})
-    return json.dumps({"status": "OK"})
-
-
-@app.route("/api/:list/task", methods=["DELETE"])
-def delete_task(list_id):
-    """Remove a task from a list."""
-    try:
-        DB.lists[list_id].tasks.splice(list_id)
-    except IndexError:
-        return json.dumps({"status": "FAIL"})
-    return json.dumps({"status": "OK"})
+@app.route("/api/<int:list_id>/task", methods=["PUT", "DELETE"])
+def add_or_delete_task(list_id):
+    if request.method == "PUT":
+        # Add a task to a list.
+        try:
+            DB.lists[list_id].tasks.append([Task(name=request.form.get("text"))])
+        except IndexError:
+            return json.dumps({"status": "FAIL"})
+        return json.dumps({"status": "OK"})
+    elif request.method == "DELETE":
+        # Remove a task from a list.
+        try:
+            del DB.lists[list_id].tasks[list_id]
+        except IndexError:
+            return json.dumps({"status": "FAIL"})
+        return json.dumps({"status": "OK"})
 
 
 @app.route("/")
