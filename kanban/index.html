@@ -54,17 +54,16 @@
        },
 
        deleteTask: function(id) {
-         console.log(this.props.key);
-         /*
+         var self = this;
          $.ajax({
-           url: '/api/' + this.props.key + '/task',
+           url: '/api/' + this.props.id + '/task',
            type: 'DELETE',
            success: function(result) {
-             var tasks = this.state.tasks;
+             var tasks = self.state.tasks;
              tasks.splice(id, 1);
-             this.setState({ tasks: tasks });
+             self.setState({ tasks: tasks });
            }
-         });*/
+         });
        },
 
        addTask: function(text) {
@@ -99,6 +98,7 @@
          var lists = this.props.lists.map(function(list, index) {
            return (
              <TaskList key={index}
+                       id={index}
                        name={list.name}
                        tasks={list.tasks} />
            );
