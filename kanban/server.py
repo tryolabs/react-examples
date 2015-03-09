@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask
 app = Flask(__name__)
 
@@ -7,7 +9,7 @@ class Task(object):
     def __init__(self, text):
         self.text = text
 
-    def to_json(self):
+    def to_dict(self):
         return { "text": self.text }
 
 class TaskList(object):
@@ -17,10 +19,10 @@ class TaskList(object):
         self.name = name
         self.tasks = tasks
 
-    def to_json(self):
+    def to_dict(self):
         return {
             "name": self.name,
-            "tasks": [task.to_json() for task in self.tasks ]
+            "tasks": [task.to_dict() for task in self.tasks ]
         }
 
 class Board(object):
@@ -29,9 +31,9 @@ class Board(object):
     def __init__(self, lists):
         self.lists = lists
 
-    def to_json(self):
+    def to_dict(self):
         return {
-            "lists": [list.to_json() for list in self.lists]
+            "lists": [list.to_dict() for list in self.lists]
         }
 
 DB = Board([
@@ -48,11 +50,13 @@ DB = Board([
 
 @app.route("/api/board/")
 def get_board():
-    pass
+    """Return the state of the board."""
+    return json.dumps(DB.to_dict())
 
 @app.route("/api/:list/task", methods=["PUT"])
 def hello():
+    """Add a task to a list."""
     pass
 
 if __name__ == "__main__":
-    app.run(port=8000)
+    app.run(port=8000, debug=True)
