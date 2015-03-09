@@ -3,6 +3,7 @@ import json
 from flask import Flask, request
 app = Flask(__name__)
 
+
 class Task(object):
     """A task."""
 
@@ -10,7 +11,8 @@ class Task(object):
         self.text = text
 
     def to_dict(self):
-        return { "text": self.text }
+        return {"text": self.text}
+
 
 class TaskList(object):
     """A list of Task objects."""
@@ -22,8 +24,9 @@ class TaskList(object):
     def to_dict(self):
         return {
             "name": self.name,
-            "tasks": [task.to_dict() for task in self.tasks ]
+            "tasks": [task.to_dict() for task in self.tasks]
         }
+
 
 class Board(object):
     """A collection of TaskLists."""
@@ -35,6 +38,7 @@ class Board(object):
         return {
             "lists": [list.to_dict() for list in self.lists]
         }
+
 
 DB = Board([
     TaskList(name="Todo",
@@ -48,10 +52,12 @@ DB = Board([
              ])
 ])
 
+
 @app.route("/api/board/")
 def get_board():
     """Return the state of the board."""
     return json.dumps(DB.to_dict())
+
 
 @app.route("/api/:list/task", methods=["PUT"])
 def add_task(list_id):
@@ -59,8 +65,9 @@ def add_task(list_id):
     try:
         DB.lists[list_id].tasks.append([Task(name=request.form.get("text"))])
     except IndexError:
-        return json.dumps({ "status": "FAIL" })
-    return json.dumps({ "status": "OK" })
+        return json.dumps({"status": "FAIL"})
+    return json.dumps({"status": "OK"})
+
 
 @app.route("/api/:list/task", methods=["DELETE"])
 def delete_task(list_id):
@@ -68,8 +75,8 @@ def delete_task(list_id):
     try:
         DB.lists[list_id].tasks.splice(list_id)
     except IndexError:
-        return json.dumps({ "status": "FAIL" })
-    return json.dumps({ "status": "OK" })
+        return json.dumps({"status": "FAIL"})
+    return json.dumps({"status": "OK"})
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True)
