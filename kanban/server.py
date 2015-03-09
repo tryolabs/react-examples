@@ -62,5 +62,14 @@ def add_task(list_id):
         return json.dumps({ "status": "FAIL" })
     return json.dumps({ "status": "OK" })
 
+@app.route("/api/:list/task", methods=["DELETE"])
+def delete_task(list_id):
+    """Remove a task from a list."""
+    try:
+        DB.lists[list_id].tasks.splice(list_id)
+    except IndexError:
+        return json.dumps({ "status": "FAIL" })
+    return json.dumps({ "status": "OK" })
+
 if __name__ == "__main__":
     app.run(port=8000, debug=True)
