@@ -56,7 +56,8 @@ def get_board():
 @app.route("/api/:list/task", methods=["PUT"])
 def add_task(list_id):
     """Add a task to a list."""
-    pass
+    DB.lists[list_id].tasks.append([Task(name="")])
+    return json.dumps({ "status": "OK" })
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True)
