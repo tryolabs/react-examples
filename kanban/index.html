@@ -54,9 +54,17 @@
        },
 
        deleteTask: function(id) {
-         var tasks = this.state.tasks;
-         tasks.splice(id, 1);
-         this.setState({ tasks: tasks });
+         console.log(this.props.key);
+         /*
+         $.ajax({
+           url: '/api/' + this.props.key + '/task',
+           type: 'DELETE',
+           success: function(result) {
+             var tasks = this.state.tasks;
+             tasks.splice(id, 1);
+             this.setState({ tasks: tasks });
+           }
+         });*/
        },
 
        addTask: function(text) {
@@ -103,10 +111,14 @@
       }
      });
 
-     React.render(
-       <App lists={fixtures.lists} />,
-       document.body
-     );
+     $(document).ready(function() {
+       $.getJSON('http://localhost:8000/api/board', function(data) {
+         React.render(
+           <App lists={data.lists} />,
+           document.body
+         );
+       });
+     });
     </script>
   </body>
 </html>
