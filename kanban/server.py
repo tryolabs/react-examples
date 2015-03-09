@@ -54,7 +54,7 @@ def get_board():
     return json.dumps(DB.to_dict())
 
 @app.route("/api/:list/task", methods=["PUT"])
-def hello():
+def add_task(list_id):
     """Add a task to a list."""
     pass
 
