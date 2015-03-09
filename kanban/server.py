@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask
+from flask import Flask, request
 app = Flask(__name__)
 
 class Task(object):
@@ -56,7 +56,10 @@ def get_board():
 @app.route("/api/:list/task", methods=["PUT"])
 def add_task(list_id):
     """Add a task to a list."""
-    DB.lists[list_id].tasks.append([Task(name="")])
+    try:
+        DB.lists[list_id].tasks.append([Task(name=request.form.get("text"))])
+    except IndexError:
+        return json.dumps({ "status": "FAIL" })
     return json.dumps({ "status": "OK" })
 
 if __name__ == "__main__":
