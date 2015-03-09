@@ -78,6 +78,7 @@ def delete_task(list_id):
         return json.dumps({"status": "FAIL"})
     return json.dumps({"status": "OK"})
 
+
 @app.route("/")
 def index():
     return app.send_static_file('index.html')
