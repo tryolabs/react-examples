@@ -60,7 +60,7 @@
        },
 
        addTask: function(text) {
-         console.log("Adding " + text);
+         this.setState({ tasks: this.state.tasks.concat([{ text: text }]) });
        },
 
        render: function() {
