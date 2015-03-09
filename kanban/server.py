@@ -1,7 +1,7 @@
 import json
 
 from flask import Flask, request
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='.')
 
 
 class Task(object):
@@ -77,6 +77,10 @@ def delete_task(list_id):
     except IndexError:
         return json.dumps({"status": "FAIL"})
     return json.dumps({"status": "OK"})
+
+@app.route("/")
+def index():
+    return app.send_static_file('index.html')
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True)
