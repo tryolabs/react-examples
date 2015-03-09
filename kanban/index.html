@@ -56,7 +56,7 @@
        deleteTask: function(id) {
          var self = this;
          $.ajax({
-           url: '/api/' + this.props.id + '/task',
+           url: '/api/' + this.props.id + '/task/' + id,
            type: 'DELETE',
            success: function(result) {
              var tasks = self.state.tasks;
@@ -76,7 +76,7 @@
            return (
              <Task key={index}
                    text={task.text}
-                   deleteTask={self.deleteTask.bind(self, task.id)} />
+                   deleteTask={self.deleteTask.bind(self, index)} />
            );
          });
          return (
