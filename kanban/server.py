@@ -34,6 +34,18 @@ class Board(object):
             "lists": [list.to_json() for list in self.lists]
         }
 
+DB = Board([
+    TaskList(name="Todo",
+             tasks=[
+                 Task("Write example React app"),
+                 Task("Write documentation")
+             ]),
+    TaskList(name="Done",
+             tasks=[
+                 Task("Learn the basics of React")
+             ])
+])
+
 @app.route("/api/board/")
 def get_board():
     pass
