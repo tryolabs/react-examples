@@ -67,7 +67,15 @@
        },
 
        addTask: function(text) {
-         this.setState({ tasks: this.state.tasks.concat([{ text: text }]) });
+         var self = this;
+         $.ajax({
+           url: '/api/' + this.props.id + '/task',
+           type: 'PUT',
+           data: { 'text' : text },
+           success: function(result) {
+             self.setState({ tasks: self.state.tasks.concat([{ text: text }]) });
+           }
+         });
        },
 
        render: function() {
