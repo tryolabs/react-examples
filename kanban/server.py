@@ -63,7 +63,7 @@ def get_board():
 def add_task(list_id):
     # Add a task to a list.
     try:
-        DB.lists[list_id].tasks.append([Task(name=request.form.get("text"))])
+        DB.lists[list_id].tasks.append(Task(text=request.form.get("text")))
     except IndexError:
         return json.dumps({"status": "FAIL"})
     return json.dumps({"status": "OK"})
