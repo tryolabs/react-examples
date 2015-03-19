@@ -37,7 +37,7 @@
      var EmailListItem = React.createClass({
        render: function() {
          return (
-           <tr onClick={this.props.on_click}>
+           <tr onClick={this.props.on_click.bind(this)}>
              <td>{this.props.subject}</td>
              <td>{this.props.from}</td>
              <td>{this.props.to}</td>
@@ -48,14 +48,14 @@
 
      var EmailList = React.createClass({
        render: function() {
-         var select_fn = this.props.select_email;
+         var self;
          var email_list = this.props.emails.map(function(mail) {
            return (
              <EmailListItem key={mail.id}
                             from={mail.from}
                             to={mail.to}
                             subject={mail.subject}
-                            on_click={select_fn.bind(this, mail.id)} />
+                            on_click={self.props.select_email.bind(self, mail.id)} />
            );
          });
 
@@ -124,12 +124,13 @@
 
      var MailboxList = React.createClass({
        render: function() {
+         var self = this;
          var select_fn = this.props.select_mailbox;
          var mailbox_list = this.props.mailboxes.map(function(mailbox) {
            return (
              <li className="list-group-item"
                  key={mailbox.id}
-                 onClick={select_fn.bind(this, mailbox.id)}>
+                 onClick={select_fn.bind(self, mailbox.id)}>
                <span className="badge">
                  {mailbox.emails.length}
                </span>
