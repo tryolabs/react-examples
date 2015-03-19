@@ -37,7 +37,7 @@
      var EmailListItem = React.createClass({
        render: function() {
          return (
-           <tr onClick={this.props.on_click.bind(this)}>
+           <tr onClick={this.props.on_click.bind(null)}>
              <td>{this.props.subject}</td>
              <td>{this.props.from}</td>
              <td>{this.props.to}</td>
@@ -48,14 +48,14 @@
 
      var EmailList = React.createClass({
        render: function() {
-         var self;
+         var self = this;
          var email_list = this.props.emails.map(function(mail) {
            return (
              <EmailListItem key={mail.id}
                             from={mail.from}
                             to={mail.to}
                             subject={mail.subject}
-                            on_click={self.props.select_email.bind(self, mail.id)} />
+                            on_click={self.props.onSelectEmail.bind(null, mail.id)} />
            );
          });
 
@@ -91,7 +91,7 @@
          return { email_id: null };
        },
 
-       select_email: function(id) {
+       handleSelectEmail: function(id) {
          this.setState({ email_id: id });
        },
 
@@ -113,7 +113,7 @@
          return (
            <div>
              <EmailList emails={this.props.emails}
-                        select_email={this.select_email} />
+                        onSelectEmail={this.handleSelectEmail} />
              <div className="email-viewer">
                {selected_email}
              </div>
@@ -125,12 +125,11 @@
      var MailboxList = React.createClass({
        render: function() {
          var self = this;
-         var select_fn = this.props.select_mailbox;
          var mailbox_list = this.props.mailboxes.map(function(mailbox) {
            return (
              <li className="list-group-item"
                  key={mailbox.id}
-                 onClick={select_fn.bind(self, mailbox.id)}>
+                 onClick={self.props.onSelectMailbox.bind(null, mailbox.id)}>
                <span className="badge">
                  {mailbox.emails.length}
                </span>
@@ -154,7 +153,7 @@
          return { mailbox_id: null };
        },
 
-       select_mailbox: function(id) {
+       handleSelectMailbox: function(id) {
          this.setState({ mailbox_id: id });
        },
 
@@ -173,7 +172,7 @@
          return (
            <div className="app row">
              <MailboxList mailboxes={this.props.mailboxes}
-                          select_mailbox={this.select_mailbox} />
+                          onSelectMailbox={this.handleSelectMailbox} />
              <div className="mailbox col-md-10">
                <div className="panel panel-default">
                  <div className="panel-body">
