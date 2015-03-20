@@ -48,16 +48,15 @@
 
      var EmailList = React.createClass({
        render: function() {
-         var self = this;
          var email_list = this.props.emails.map(function(mail) {
            return (
              <EmailListItem key={mail.id}
                             from={mail.from}
                             to={mail.to}
                             subject={mail.subject}
-                            on_click={self.props.onSelectEmail.bind(null, mail.id)} />
+                            on_click={this.props.onSelectEmail.bind(null, mail.id)} />
            );
-         });
+         }.bind(this));
 
          return (
            <table className="email-list table table-striped table-condensed">
@@ -124,19 +123,18 @@
 
      var MailboxList = React.createClass({
        render: function() {
-         var self = this;
          var mailbox_list = this.props.mailboxes.map(function(mailbox) {
            return (
              <li className="list-group-item"
                  key={mailbox.id}
-                 onClick={self.props.onSelectMailbox.bind(null, mailbox.id)}>
+                 onClick={this.props.onSelectMailbox.bind(null, mailbox.id)}>
                <span className="badge">
                  {mailbox.emails.length}
                </span>
                {mailbox.name}
              </li>
            );
-         });
+         }.bind(this));
 
          return (
            <div className="col-md-2">
