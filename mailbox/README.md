@@ -63,3 +63,14 @@ var EmailList = React.createClass({
   }
 });
 ```
+
+The render function iterates over the email list, collecting (Or it 'maps over')
+`<EmailListItem>` components, passing some initial props to them. There are two
+props here that matter:
+
+* `key`: This is a prop that you pass to every list item when building lists in
+  react. It can simply be the index (Which the `map` function provides), or a
+  more domain-specific identifier.
+
+* `on_click`: This prop sends a function that's passed from even higher up down
+  to the `<EmailListItem>`. We use `bind` to partially apply the function.
