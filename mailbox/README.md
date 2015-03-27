@@ -74,3 +74,22 @@ props here that matter:
 
 * `on_click`: This prop sends a function that's passed from even higher up down
   to the `<EmailListItem>`. We use `bind` to partially apply the function.
+
+Now, the `<EmailListItem>` component looks like this:
+
+```javascript
+var EmailListItem = React.createClass({
+  render: function() {
+    return (
+      <tr onClick={this.props.on_click.bind(null)}>
+        <td>{this.props.subject}</td>
+        <td>{this.props.from}</td>
+        <td>{this.props.to}</td>
+      </tr>
+    );
+  }
+});
+```
+
+Here we use React's `onClick` prop to declare that when that table row is
+clicked, the `on_click` prop should be called.
