@@ -109,6 +109,7 @@ var NoneSelected = React.createClass({
     );
   }
 });
+```
 
 Now, we build a Mailbox component we can use to display the current email and
 the list of emails. The `<Mailbox>` has only one item of state: The ID of the
