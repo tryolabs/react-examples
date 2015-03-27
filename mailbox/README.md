@@ -195,3 +195,42 @@ this has an ID (state) and a method to track the currently selected mailbox. The
 `render` function is essentially the same as well: It renders a `<Mailbox>`
 list, and if a mailbox is selected, it renders it, otherwise it renders a
 `<NoneSelected>`.
+
+```javascript
+var App = React.createClass({
+  getInitialState: function(){
+    return { mailbox_id: null };
+  },
+
+  handleSelectMailbox: function(id) {
+    this.setState({ mailbox_id: id });
+  },
+
+  render: function() {
+    var mailbox_id = this.state.mailbox_id;
+    if (mailbox_id) {
+      var mailbox = this.props.mailboxes.filter(function(mailbox) {
+        return mailbox.id == mailbox_id;
+      })[0];
+      selected_mailbox = <Mailbox key={mailbox.id}
+                                  emails={mailbox.emails} />;
+    } else {
+      selected_mailbox = <NoneSelected text="mailbox" />;
+    }
+
+    return (
+      <div className="app row">
+        <MailboxList mailboxes={this.props.mailboxes}
+                     onSelectMailbox={this.handleSelectMailbox} />
+        <div className="mailbox col-md-10">
+          <div className="panel panel-default">
+            <div className="panel-body">
+              {selected_mailbox}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+});
+```
