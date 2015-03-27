@@ -93,3 +93,19 @@ var EmailListItem = React.createClass({
 
 Here we use React's `onClick` prop to declare that when that table row is
 clicked, the `on_click` prop should be called.
+
+Here we take a slight detour to make a small, reusable component. We use this
+whenever we let the user choose an element from a list, to represent the initial
+state when no element is chosen. The `<NoneSelected>` component uses a single
+prop, `text`.
+
+```javascript
+var NoneSelected = React.createClass({
+  render: function() {
+    return (
+      <div className="none-selected alert alert-warning" role="alert">
+        <span>No {this.props.text} selected.</span>
+      </div>
+    );
+  }
+});
