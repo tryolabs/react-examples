@@ -29,3 +29,37 @@ var Email = React.createClass({
 This is just a `div` with a definition list of the various props, nothing that
 requires an explanation.. We embed the raw HTML body using React's
 `dangerouslySetInnerHTML`.
+
+Now, the list of emails. Which is actually rendered as a table, but semantically
+is a list. Let's first go through the list itself:
+
+```javascript
+var EmailList = React.createClass({
+  render: function() {
+    var email_list = this.props.emails.map(function(mail) {
+      return (
+        <EmailListItem key={mail.id}
+                       from={mail.from}
+                       to={mail.to}
+                       subject={mail.subject}
+                       on_click={this.props.onSelectEmail.bind(null, mail.id)} />
+      );
+    }.bind(this));
+
+    return (
+      <table className="email-list table table-striped table-condensed">
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th>From</th>
+            <th>To</th>
+          </tr>
+        </thead>
+        <tbody>
+          {email_list}
+        </tbody>
+      </table>
+    );
+  }
+});
+```
