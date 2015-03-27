@@ -158,3 +158,34 @@ var Mailbox = React.createClass({
   }
 });
 ```
+
+And now the list of mailboxes. This isn't too complicated, the `render` function
+just maps over its props to create an array of list items, which it embeds in
+the JSX.
+
+```
+var MailboxList = React.createClass({
+  render: function() {
+    var mailbox_list = this.props.mailboxes.map(function(mailbox) {
+      return (
+        <li className="list-group-item"
+            key={mailbox.id}
+            onClick={this.props.onSelectMailbox.bind(null, mailbox.id)}>
+          <span className="badge">
+            {mailbox.emails.length}
+          </span>
+          {mailbox.name}
+        </li>
+      );
+    }.bind(this));
+
+    return (
+      <div className="col-md-2">
+        <ul className="mailboxes list-group">
+          {mailbox_list}
+        </ul>
+      </div>
+    );
+  }
+});
+```
