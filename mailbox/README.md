@@ -306,3 +306,19 @@ Finally, we add a little style:
     font-size: 1.2em;
 }
 ```
+
+# A closer look at callbacks
+
+Callbacks are passed down through the component hierarchy by props, and actions
+climb their way back up to the component that handles them. For instance, when
+selecting mailboxes:
+
+1. The `<App>` component has a method, `handleSelectMailbox`, which takes a
+   mailbox ID and sets the app's current mailbox ID to it.
+2. In `render`, the method is passed to `<MailboxList>` as the `onSelectMailbox`
+   prop.
+3. In `<MailboxList>`, it's bound to null and assigned to the `onClick` event
+   prop of the mailbox list item.
+
+The repetition (Passing things again and again) rather violates DRY, but it's
+not hard to follow after an initial look through the code.
