@@ -189,3 +189,9 @@ var MailboxList = React.createClass({
   }
 });
 ```
+
+The `<App>` component ties everything together. Like the `<Mailbox>` component,
+this has an ID (state) and a method to track the currently selected mailbox. The
+`render` function is essentially the same as well: It renders a `<Mailbox>`
+list, and if a mailbox is selected, it renders it, otherwise it renders a
+`<NoneSelected>`.
