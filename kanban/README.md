@@ -128,4 +128,18 @@ if __name__ == "__main__":
 
 ## The Client
 
+Now, we render everything. First we call `/api/board` to get the initial state
+of the board, and use this to render the `<App>` component.
+
+```javascript
+$(document).ready(function() {
+  $.getJSON('http://localhost:8000/api/board', function(data) {
+    React.render(
+      <App lists={data.lists} />,
+      document.body
+    );
+  });
+});
+```
+
 [flask]: http://flask.pocoo.org/
