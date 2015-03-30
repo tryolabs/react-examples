@@ -128,6 +128,28 @@ if __name__ == "__main__":
 
 ## The Client
 
+The `<App>` component, in this example, has no methods other than `render`:
+
+```javascript
+var App = React.createClass({
+  render: function() {
+    var lists = this.props.lists.map(function(list, index) {
+      return (
+        <TaskList key={index}
+                  id={index}
+                  name={list.name}
+                  tasks={list.tasks} />
+      );
+    });
+    return (
+      <div className="lists">
+        {lists}
+      </div>
+    );
+ }
+});
+```
+
 Now, we render everything. First we call `/api/board` to get the initial state
 of the board, and use this to render the `<App>` component.
 
