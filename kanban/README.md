@@ -54,6 +54,22 @@ class Board(object):
         }
 ```
 
+For persistence, we'll just use the memory:
+
+```python
+DB = Board([
+    TaskList(name="Todo",
+             tasks=[
+                 Task("Write example React app"),
+                 Task("Write documentation")
+             ]),
+    TaskList(name="Done",
+             tasks=[
+                 Task("Learn the basics of React")
+             ])
+])
+```
+
 ## The Client
 
 [flask]: http://flask.pocoo.org/
