@@ -119,6 +119,13 @@ def index():
     return app.send_static_file('index.html')
 ```
 
+And now we tell Flask to always run the server on port 8000:
+
+```python
+if __name__ == "__main__":
+    app.run(port=8000, debug=True)
+```
+
 ## The Client
 
 [flask]: http://flask.pocoo.org/
