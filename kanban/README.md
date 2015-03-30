@@ -70,6 +70,21 @@ DB = Board([
 ])
 ```
 
+### Routes
+
+And now, the routes. This is just a simple REST API that uses JSON, handles
+actions and even some errors.
+
+First, we need a route that will be called on application startup, to get the
+initial (or current) state of the Kanban board:
+
+```python
+@app.route("/api/board/")
+def get_board():
+    """Return the state of the board."""
+    return json.dumps(DB.to_dict())
+```
+
 ## The Client
 
 [flask]: http://flask.pocoo.org/
