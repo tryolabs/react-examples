@@ -4,6 +4,8 @@ The app we want to design is basically a React clone of the email client in
 Ember's home page. It won't send email, or communicate with a backend to pull a
 list of emails, it's just a bit of static data with some Bootstrap styling.
 
+## Components
+
 First things first: The `Email` component.
 
 ```javascript
@@ -310,7 +312,7 @@ Finally, we add a little style:
 }
 ```
 
-# A closer look at callbacks
+## A closer look at callbacks
 
 Callbacks are passed down through the component hierarchy by props, and actions
 climb their way back up to the component that handles them. For instance, when
