@@ -98,6 +98,27 @@ def add_task(list_id):
     return json.dumps({"status": "OK"})
 ```
 
+And a way to delete tasks:
+
+```python
+@app.route("/api/<int:list_id>/task/<int:task_id>", methods=["DELETE"])
+def delete_task(list_id, task_id):
+    # Remove a task from a list.
+    try:
+        del DB.lists[list_id].tasks[task_id]
+    except IndexError:
+        return json.dumps({"status": "FAIL"})
+    return json.dumps({"status": "OK"})
+```
+
+Finally, we use the root route to serve the `index.html` file:
+
+```python
+@app.route("/")
+def index():
+    return app.send_static_file('index.html')
+```
+
 ## The Client
 
 [flask]: http://flask.pocoo.org/
