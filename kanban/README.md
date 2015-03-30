@@ -85,6 +85,19 @@ def get_board():
     return json.dumps(DB.to_dict())
 ```
 
+We also need a way to add new tasks to a list, which is what `add_task` does.
+
+```python
+@app.route("/api/<int:list_id>/task", methods=["PUT"])
+def add_task(list_id):
+    # Add a task to a list.
+    try:
+        DB.lists[list_id].tasks.append(Task(text=request.form.get("text")))
+    except IndexError:
+        return json.dumps({"status": "FAIL"})
+    return json.dumps({"status": "OK"})
+```
+
 ## The Client
 
 [flask]: http://flask.pocoo.org/
