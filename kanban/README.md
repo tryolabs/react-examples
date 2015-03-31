@@ -174,29 +174,6 @@ var AddTask = React.createClass({
 });
 ```
 
-The `<App>` component, in this example, has no methods other than `render`,
-which just displays a list of `<TaskList>` components.
-
-```javascript
-var App = React.createClass({
-  render: function() {
-    var lists = this.props.lists.map(function(list, index) {
-      return (
-        <TaskList key={index}
-                  id={index}
-                  name={list.name}
-                  tasks={list.tasks} />
-      );
-    });
-    return (
-      <div className="lists">
-        {lists}
-      </div>
-    );
- }
-});
-```
-
 The `<TaskList>` component has a single item of state, a list of tasks, and two
 methods. The non-render methods are below:
 
@@ -258,6 +235,30 @@ render: function() {
   );
 }
 ```
+
+The `<App>` component, in this example, has no methods other than `render`,
+which just displays a list of `<TaskList>` components.
+
+```javascript
+var App = React.createClass({
+  render: function() {
+    var lists = this.props.lists.map(function(list, index) {
+      return (
+        <TaskList key={index}
+                  id={index}
+                  name={list.name}
+                  tasks={list.tasks} />
+      );
+    });
+    return (
+      <div className="lists">
+        {lists}
+      </div>
+    );
+ }
+});
+```
+
 
 Now, we render everything. First we call `/api/board` to get the initial state
 of the board, and use this to render the `<App>` component.
