@@ -232,6 +232,32 @@ var TaskList = React.createClass({
 });
 ```
 
+The render method:
+
+```javascript
+render: function() {
+  var self = this;
+  var task_list = this.state.tasks.map(function(task, index) {
+    return (
+      <Task key={index}
+            text={task.text}
+            deleteTask={self.deleteTask.bind(self, index)} />
+    );
+  });
+  return (
+    <div className="task-list">
+      <h1 className="list-title">
+        {this.props.name}
+      </h1>
+      <ul className="list-tasks">
+        {task_list}
+      </ul>
+      <AddTask addTask={self.addTask} />
+    </div>
+  );
+}
+```
+
 Now, we render everything. First we call `/api/board` to get the initial state
 of the board, and use this to render the `<App>` component.
 
