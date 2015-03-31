@@ -196,6 +196,42 @@ var App = React.createClass({
 });
 ```
 
+The `<TaskList>` component has a single item of state, a list of tasks, and two
+methods. The non-render methods are below:
+
+```javascript
+var TaskList = React.createClass({
+  getInitialState: function() {
+    return { tasks: this.props.tasks };
+  },
+
+  deleteTask: function(id) {
+    var self = this;
+    $.ajax({
+      url: '/api/' + this.props.id + '/task/' + id,
+      type: 'DELETE',
+      success: function(result) {
+        var tasks = self.state.tasks;
+        tasks.splice(id, 1);
+        self.setState({ tasks: tasks });
+      }
+    });
+  },
+
+  addTask: function(text) {
+    var self = this;
+    $.ajax({
+      url: '/api/' + this.props.id + '/task',
+      type: 'PUT',
+      data: { 'text' : text },
+      success: function(result) {
+        self.setState({ tasks: self.state.tasks.concat([{ text: text }]) });
+      }
+    });
+  },
+});
+```
+
 Now, we render everything. First we call `/api/board` to get the initial state
 of the board, and use this to render the `<App>` component.
 
