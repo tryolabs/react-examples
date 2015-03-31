@@ -128,6 +128,20 @@ if __name__ == "__main__":
 
 ## The Client
 
+```javascript
+var Task = React.createClass({
+  render: function() {
+    return (
+      <li className="task">
+        {this.props.text}
+        <span className="delete"
+              onClick={this.props.deleteTask} />
+      </li>
+    );
+  }
+});
+```
+
 The `<App>` component, in this example, has no methods other than `render`:
 
 ```javascript
