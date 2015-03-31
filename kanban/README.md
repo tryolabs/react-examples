@@ -175,7 +175,15 @@ var AddTask = React.createClass({
 ```
 
 The `<TaskList>` component has a single item of state, a list of tasks, and two
-methods. The non-render methods are below:
+methods for deleting and adding tasks. The `deleteTask` method just takes the ID
+of the pat to delete, uses jQuery to send the appropriate `DELETE` request, then
+removes the matching task from the list.
+
+This isn't quite optimistic updating, since it requires the request to at least
+reach the server and receive a reply -- even if it fails.
+
+The addTask method does just what you'd expect, sending a request then expanding
+the tasks list.
 
 ```javascript
 var TaskList = React.createClass({
