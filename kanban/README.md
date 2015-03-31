@@ -128,7 +128,7 @@ if __name__ == "__main__":
 
 ## The Client
 
-The task component is very simple, all it does is display its contents and a
+The `<Task>` component is very simple, all it does is display its contents and a
 little button to call a deletion callback.
 
 ```javascript
