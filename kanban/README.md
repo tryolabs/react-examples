@@ -210,4 +210,55 @@ $(document).ready(function() {
 });
 ```
 
+And finally, some style:
+
+```css
+@charset "utf-8";
+
+body {
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.lists {
+    padding: 50px;
+}
+
+.task-list {
+    width: 220px;
+    float: left;
+    margin-right: 25px;
+    padding: 25px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.list-title {
+    margin: 0;
+    text-align: center;
+}
+
+.list-tasks {
+    padding: 0;
+}
+
+.task {
+    list-style-type: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.delete:before {
+    content: "×";
+}
+
+.delete {
+    color: red;
+    float: right;
+    font-weight: bold;
+}
+```
+
 [flask]: http://flask.pocoo.org/
