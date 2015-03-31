@@ -145,6 +145,10 @@ var Task = React.createClass({
 });
 ```
 
+The `<AddTask>` component is just an input box and a button. When you write
+text, it adds it to the internal `text` state, and when you click on the button,
+it calls an `addTask` callback with the new task's text.
+
 ```javascript
 var AddTask = React.createClass({
   getInitialState: function() {
