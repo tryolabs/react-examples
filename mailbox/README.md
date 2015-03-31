@@ -8,6 +8,8 @@ list of emails, it's just a bit of static data with some Bootstrap styling.
 
 ## Components
 
+![Component structure](img/structure.png)
+
 First things first: The `Email` component.
 
 ```javascript
