@@ -172,7 +172,7 @@ And now the list of mailboxes. This isn't too complicated, the `render` function
 just maps over its props to create an array of list items, which it embeds in
 the JSX.
 
-```
+```javascript
 var MailboxList = React.createClass({
   render: function() {
     var mailbox_list = this.props.mailboxes.map(function(mailbox) {
