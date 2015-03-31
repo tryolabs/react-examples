@@ -174,7 +174,8 @@ var AddTask = React.createClass({
 });
 ```
 
-The `<App>` component, in this example, has no methods other than `render`:
+The `<App>` component, in this example, has no methods other than `render`,
+which just displays a list of `<TaskList>` components.
 
 ```javascript
 var App = React.createClass({
