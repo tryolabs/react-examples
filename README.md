@@ -11,9 +11,15 @@ Examples of working with [React][react].
 A static email client, this is basically the simplest React app that implements
 callbacks and event handlers.
 
+To run, run `./run_server.sh`.
+
 ## Kanban
 
 A simple Kanban app with a Python server for persistence.
+
+To run, ensure [Flask][flask] is installed and run `python server.py`.
+
+[flask]: http://flask.pocoo.org/
 
 # License
 
