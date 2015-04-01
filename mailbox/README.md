@@ -35,7 +35,7 @@ var Email = React.createClass({
 ```
 
 This is just a `div` with a definition list of the various props, nothing that
-requires an explanation.. We embed the raw HTML body using React's
+requires an explanation. We embed the raw HTML body using React's
 `dangerouslySetInnerHTML`.
 
 Now, the list of emails. Which is actually rendered as a table, but semantically
