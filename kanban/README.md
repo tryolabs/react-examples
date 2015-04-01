@@ -3,7 +3,8 @@
 ![Screenshot of the app](img/kanban.png)
 
 This example will be, essentially, an underpowered Trello clone. Here we'll
-actually run a server and implement persistent storage with optimistic updating.
+actually run a server and implement persistent storage of new tasks and
+deletion.
 
 ## The Server
 
