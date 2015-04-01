@@ -130,6 +130,8 @@ if __name__ == "__main__":
 
 ## The Client
 
+![Component structure](img/structure.png)
+
 The `<Task>` component is very simple, all it does is display its contents and a
 little button to call a deletion callback.
 
