@@ -187,8 +187,8 @@ removes the matching task from the list.
 This isn't quite optimistic updating, since it requires the request to at least
 reach the server and receive a reply -- even if it fails.
 
-The addTask method does just what you'd expect, sending a request then expanding
-the tasks list.
+The `addTask` method does just what you'd expect, sending a request then
+expanding the tasks list.
 
 ```javascript
 var TaskList = React.createClass({
