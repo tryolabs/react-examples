@@ -223,7 +223,7 @@ var TaskList = React.createClass({
 });
 ```
 
-The render method:
+The `render` method:
 
 ```javascript
 render: function() {
