@@ -4,6 +4,9 @@ var Modal = React.createClass({
             return (
               <div className="modal">
                 <h3>My Modal</h3>
+                <div className="body">
+                  <p>This is the modal&apos;s body.</p>
+                </div>
                 <button onClick={this.props.handleClose}>Close modal</button>
               </div>
             );
