@@ -69,7 +69,6 @@ button {
     transition: all 0.2s;
 }
 
-
 .modal-anim-leave {
     opacity: 1;
     transform: scale(1);
