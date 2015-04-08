@@ -28,7 +28,7 @@ var App = React.createClass({
 
     render: function() {
         return (
-            <div>
+            <div className="app">
               <h1>App</h1>
               <button onClick={this.openModal}>Open modal</button>
               <Modal isOpen={this.state.isModalOpen}
