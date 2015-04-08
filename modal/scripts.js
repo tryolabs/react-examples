@@ -2,15 +2,17 @@ var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var Modal = React.createClass({
     render: function() {
-        return (
-          <div className="modal">
-            <h3>My Modal</h3>
-            <div className="body">
-              <p>This is the modal&apos;s body.</p>
-            </div>
-            <button onClick={this.props.handleClose}>Close modal</button>
-          </div>
-        );
+        if(this.props.isOpen){
+            return (
+              <ReactCSSTransitionGroup transitionName={this.props.transitionName}>
+                <div className="modal">
+                  {this.props.children}
+                </div>
+              </ReactCSSTransitionGroup>
+            );
+        } else {
+            return <ReactCSSTransitionGroup transitionName={this.props.transitionName} />;
+        }
     }
 });
 
@@ -28,20 +30,19 @@ var App = React.createClass({
     },
 
     render: function() {
-        if(this.state.isModalOpen) {
-            var modal = <Modal key="my-modal"
-                               handleClose={this.closeModal} />;
-        } else {
-            var modal = [];
-        }
-
         return (
           <div className="app">
             <h1>App</h1>
             <button onClick={this.openModal}>Open modal</button>
-            <ReactCSSTransitionGroup transitionName="modal-anim">
-              {modal}
-            </ReactCSSTransitionGroup>
+            <Modal key="my-modal"
+                   isOpen={this.state.isModalOpen}
+                   transitionName="modal-anim">
+              <h3>My Modal</h3>
+              <div className="body">
+                <p>This is the modal&apos;s body.</p>
+              </div>
+              <button onClick={this.closeModal}>Close modal</button>
+            </Modal>
           </div>
         );
     }
