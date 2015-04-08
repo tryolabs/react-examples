@@ -15,11 +15,28 @@ body {
 
     border: 1px solid #ccc;
     border-radius: 4px;
+
+    z-index: 0;
 }
 
-.app h1 {
+h1, h3 {
     text-align: center;
     margin: 0 0 20px 0;
+}
+
+.modal {
+    width: 200px;
+    height: 100px;
+    padding: 20px;
+
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    margin: -70px 0 0 -120px;
+
+    border: 1px solid #ccc;
+    background: white;
 }
 
 button {
