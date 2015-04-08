@@ -8,7 +8,16 @@ list of emails, it's just a bit of static data with some Bootstrap styling.
 
 ## Components
 
+Each component is, as always, a visible, semantic element on the screen. We have
+components to represent an email, a list of emails, the list of mailboxes, and a
+general component for when no email or mailbox has been selected. I’ve
+highlighted component structure, as the React examples do, in this image:
+
 ![Component structure](img/structure.png)
+
+The interface is precisely what you’d expect. There’s a list of mailboxes
+(Inbox, Spam), when you click on one it updates the list of emails, and when you
+click on an email from the list it displays its metadata and body.
 
 First things first: The `Email` component.
 
@@ -315,6 +324,10 @@ Finally, we add a little style:
     font-size: 1.2em;
 }
 ```
+
+And that’s it. That’s the simplest react application with some actions and more
+than a couple components. You can run this using the `run_server.sh` script in
+this repository.
 
 ## A closer look at callbacks
 
