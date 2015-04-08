@@ -1,3 +1,5 @@
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
 var Modal = React.createClass({
     render: function() {
         if(this.props.isOpen) {
@@ -30,13 +32,17 @@ var App = React.createClass({
     },
 
     render: function() {
+        var modal = <Modal key="my-modal"
+                           isOpen={this.state.isModalOpen}
+                           handleClose={this.closeModal} />;
         return (
-            <div className="app">
-              <h1>App</h1>
-              <button onClick={this.openModal}>Open modal</button>
-              <Modal isOpen={this.state.isModalOpen}
-                     handleClose={this.closeModal} />
-            </div>
+          <div className="app">
+            <h1>App</h1>
+            <button onClick={this.openModal}>Open modal</button>
+            <ReactCSSTransitionGroup transitionName="modal-anim">
+              {modal}
+            </ReactCSSTransitionGroup>
+          </div>
         );
     }
 });
