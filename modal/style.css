@@ -1,14 +1,25 @@
 body {
     font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    margin: 0;
+
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
 }
 
 .app {
     width: 300px;
     margin: 0 auto;
+    padding: 20px;
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .app h1 {
     text-align: center;
+    margin: 0 0 20px 0;
 }
 
 button {
