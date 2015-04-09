@@ -95,3 +95,35 @@ React.render(
     document.body
 );
 ```
+
+## Style
+
+Most of the stylesheet is not important to this example, it's just giving the
+app and modal components a shape. The import part is the CSS animation classes
+that React will use:
+
+```css
+.modal-anim-enter {
+    opacity: 0.00;
+    transform: scale(0.7);
+    transition: all 0.2s;
+}
+
+.modal-anim-enter.modal-anim-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: all 0.2s;
+}
+
+.modal-anim-leave {
+    opacity: 1;
+    transform: scale(1);
+    transition: all 0.2s;
+}
+
+.modal-anim-leave.modal-anim-leave-active {
+    opacity: 0.00;
+    transform: scale(0.7);
+    transition: all 0.2s;
+}
+```
