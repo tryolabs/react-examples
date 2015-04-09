@@ -112,7 +112,6 @@ that React will use:
 .modal-anim-enter.modal-anim-enter-active {
     opacity: 1;
     transform: scale(1);
-    transition: all 0.2s;
 }
 
 .modal-anim-leave {
@@ -124,8 +123,8 @@ that React will use:
 .modal-anim-leave.modal-anim-leave-active {
     opacity: 0.00;
     transform: scale(0.7);
-    transition: all 0.2s;
 }
+
 ```
 
 The `enter` selector sets the style for the component's initial state before
