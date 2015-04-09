@@ -11,3 +11,36 @@ little more complex:
   functionality.
 * We want the component to animate mounting/unmounting using React's CSS
   transitions.
+
+## Components
+
+First, we have to use React's CSS Transition Group component:
+
+```javascript
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+```
+
+Next, we create the modal. This component automates the following:
+
+* It determines whether or not it should be shown using a prop.
+* It wraps its contents in a CSS Transition Group.
+
+```javascript
+var Modal = React.createClass({
+    render: function() {
+        if(this.props.isOpen){
+            return (
+              <ReactCSSTransitionGroup transitionName={this.props.transitionName}>
+                <div className="modal">
+                  {this.props.children}
+                </div>
+              </ReactCSSTransitionGroup>
+            );
+        } else {
+            return <ReactCSSTransitionGroup transitionName={this.props.transitionName} />;
+        }
+    }
+});
+```
+
+Note how we use `this.props.children` to extract the component's body.
