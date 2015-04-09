@@ -127,3 +127,7 @@ that React will use:
     transition: all 0.2s;
 }
 ```
+
+The `enter` selector sets the style for the component's initial state before
+animation begins, and `enter-active` sets the final state. `leave` and
+`leave-active` are the opposite.
