@@ -34,8 +34,7 @@ var App = React.createClass({
           <div className="app">
             <h1>App</h1>
             <button onClick={this.openModal}>Open modal</button>
-            <Modal key="my-modal"
-                   isOpen={this.state.isModalOpen}
+            <Modal isOpen={this.state.isModalOpen}
                    transitionName="modal-anim">
               <h3>My Modal</h3>
               <div className="body">
