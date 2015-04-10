@@ -11,6 +11,12 @@ callbacks and event handlers.
 
 To run, run `./run_server.sh`.
 
+## [Modal][modal]
+
+A reusable modal component.
+
+To run, run `./run_server.sh`.
+
 ## [Kanban][kanban]
 
 A simple Kanban app with a Python server for persistence.
@@ -20,6 +26,7 @@ To run, ensure [Flask][flask] is installed and run `python server.py`.
 [react]: https://facebook.github.io/react/
 [flask]: http://flask.pocoo.org/
 [mailbox]: https://github.com/tryolabs/react-examples/tree/master/mailbox#readme
+[modal]: https://github.com/tryolabs/react-examples/tree/master/modal#readme
 [kanban]: https://github.com/tryolabs/react-examples/tree/master/kanban#readme
 
 # License
