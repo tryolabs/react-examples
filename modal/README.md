@@ -99,8 +99,11 @@ React.render(
 ## Style
 
 Most of the stylesheet is not important to this example, it's just giving the
-app and modal components a shape. The import part is the CSS animation classes
-that React will use:
+app and modal components a shape. The important part is the CSS animation
+classes that React will use.
+
+The `enter` selector sets the style for the component's initial state before
+animation begins, and `enter-active` sets the final state:
 
 ```css
 .modal-anim-enter {
@@ -113,7 +116,11 @@ that React will use:
     opacity: 1;
     transform: scale(1);
 }
+```
 
+`leave` and `leave-active` are the opposite:
+
+```css
 .modal-anim-leave {
     opacity: 1;
     transform: scale(1);
@@ -124,9 +131,4 @@ that React will use:
     opacity: 0.00;
     transform: scale(0.7);
 }
-
 ```
-
-The `enter` selector sets the style for the component's initial state before
-animation begins, and `enter-active` sets the final state. `leave` and
-`leave-active` are the opposite.
