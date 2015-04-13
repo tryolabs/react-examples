@@ -47,8 +47,13 @@ var Modal = React.createClass({
 
 Note how we use `this.props.children` to extract the component's body.
 
-Now we just create an `App` component to hold the state that tells React whether
-the modal is open, and a couple of methods to open and close it.
+Because React requires that the render function return a component, rather than
+returning `null` when the modal is not open, we return an empty transition
+group.
+
+Now, for this example, we'll create an `App` component to hold the state that
+tells React whether the modal is open, and a couple of methods to open and close
+it.
 
 ```javascript
 var App = React.createClass({
