@@ -1,0 +1,118 @@
+var DragDropMixin = ReactDND.DragDropMixin;
+var PropTypes = React.PropTypes;
+
+const itemDropTarget = {
+  acceptDrop: function(component, item) {
+    window.alert('You dropped ' + item.name + '!');
+  }
+};
+
+const style = {
+  height: '12rem',
+  width: '12rem',
+  color: 'white',
+  padding: '2rem',
+  textAlign: 'center'
+};
+
+const itemDragSource = {
+  beginDrag: function(component) {
+    return {
+      item: {
+        name: component.props.name
+      }
+    };
+  }
+};
+
+const style = {
+  border: '1px dashed gray',
+  backgroundColor: 'white',
+  padding: '0.5rem',
+  margin: '0.5rem',
+  maxWidth: 80
+};
+
+var ItemTypes = {
+    ITEM: 'item'
+};
+
+var Item = React.createClass({
+  mixins: [DragDropMixin],
+
+  propTypes: {
+    name: PropTypes.string.isRequired
+  },
+
+  statics: {
+    configureDragDrop: function(register) {
+      register(ItemTypes.ITEM, {
+        dragSource: itemDragSource
+      });
+    }
+  },
+
+  render: function () {
+    const name = this.props;
+    const isDragging = this.getDragState(ItemTypes.ITEM);
+    const opacity = isDragging ? 0.4 : 1;
+
+    return (
+      <div {...this.dragSourceFor(ItemTypes.ITEM)}>
+        {name}
+      </div>
+    );
+  }
+});
+
+var Dustbin = React.createClass({
+  mixins: [DragDropMixin],
+
+  statics: {
+    configureDragDrop: function(register) {
+      register(ItemTypes.ITEM, {
+        dropTarget: itemDropTarget
+      });
+    }
+  },
+
+  render: function() {
+    const dropState = this.getDropState(ItemTypes.ITEM);
+
+    var backgroundColor = '#222';
+    if (dropState.isHovering) {
+      backgroundColor = 'darkgreen';
+    } else if (dropState.isDragging) {
+      backgroundColor = 'darkkhaki';
+    }
+
+    return (
+      <div {...this.dropTargetFor(ItemTypes.ITEM)}>
+        {dropState.isHovering ?
+          'Release to drop' :
+          'Drag item here'
+        }
+      </div>
+    );
+  }
+});
+
+var Container = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <Dustbin />
+        <div>
+          <Item name='Glass' />
+          <Item name='Banana' />
+          <Item name='Paper' />
+        </div>
+      </div>
+    );
+  }
+});
+
+React.render(
+    <Container />,
+    document.body
+);
