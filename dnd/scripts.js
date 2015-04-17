@@ -7,14 +7,6 @@ const itemDropTarget = {
   }
 };
 
-const style = {
-  height: '12rem',
-  width: '12rem',
-  color: 'white',
-  padding: '2rem',
-  textAlign: 'center'
-};
-
 const itemDragSource = {
   beginDrag: function(component) {
     return {
@@ -23,14 +15,6 @@ const itemDragSource = {
       }
     };
   }
-};
-
-const style = {
-  border: '1px dashed gray',
-  backgroundColor: 'white',
-  padding: '0.5rem',
-  margin: '0.5rem',
-  maxWidth: 80
 };
 
 var ItemTypes = {
