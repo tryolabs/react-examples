@@ -58,9 +58,10 @@ var Item = React.createClass({
     const opacity = isDragging ? 0.4 : 1;
 
     return (
-      <div {...this.dragSourceFor(ItemTypes.ITEM)}>
+      <li className="item"
+           {...this.dragSourceFor(ItemTypes.ITEM)}>
         {name}
-      </div>
+      </li>
     );
   }
 });
@@ -79,15 +80,16 @@ var Dustbin = React.createClass({
   render: function() {
     const dropState = this.getDropState(ItemTypes.ITEM);
 
-    var backgroundColor = '#222';
+    var state = 'none';
     if (dropState.isHovering) {
-      backgroundColor = 'darkgreen';
+      state = 'hovering';
     } else if (dropState.isDragging) {
-      backgroundColor = 'darkkhaki';
+      state = 'dragging';
     }
 
     return (
-      <div {...this.dropTargetFor(ItemTypes.ITEM)}>
+      <div className={'bin bin-state-' + state}
+           {...this.dropTargetFor(ItemTypes.ITEM)}>
         {dropState.isHovering ?
           'Release to drop' :
           'Drag item here'
@@ -102,11 +104,11 @@ var Container = React.createClass({
     return (
       <div>
         <Dustbin />
-        <div>
+        <ul className="items">
           <Item name='Glass' />
           <Item name='Banana' />
           <Item name='Paper' />
-        </div>
+        </ul>
       </div>
     );
   }
