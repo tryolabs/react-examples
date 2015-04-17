@@ -64,15 +64,15 @@ var Dustbin = React.createClass({
   render: function() {
     const dropState = this.getDropState(ItemTypes.ITEM);
 
-    var state = 'none';
+    var stateClass = 'none';
     if (dropState.isHovering) {
-      state = 'hovering';
+      stateClass = 'hovering';
     } else if (dropState.isDragging) {
-      state = 'dragging';
+      stateClass = 'dragging';
     }
 
     return (
-      <div className={'bin bin-state-' + state}
+      <div className={'bin bin-state-' + stateClass}
            {...this.dropTargetFor(ItemTypes.ITEM)}>
         {dropState.isHovering ?
           'Release to drop' :
