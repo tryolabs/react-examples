@@ -30,6 +30,16 @@ body {
     background-color: #2ECC71;
 }
 
+.dropped {
+    margin: 20px 0;
+    padding: 0;
+}
+
+.dropped li {
+    list-style-type: none;
+    font-size: 0.6em;
+}
+
 .items {
     padding: 0;
     text-align: center;
