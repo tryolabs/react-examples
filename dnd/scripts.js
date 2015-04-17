@@ -42,7 +42,7 @@ var Item = React.createClass({
     const opacity = isDragging ? 0.4 : 1;
 
     return (
-      <li className="item"
+      <li className='item'
            {...this.dragSourceFor(ItemTypes.ITEM)}>
         {name}
       </li>
@@ -88,7 +88,7 @@ var Container = React.createClass({
     return (
       <div>
         <Dustbin />
-        <ul className="items">
+        <ul className='items'>
           <Item name='Glass' />
           <Item name='Banana' />
           <Item name='Paper' />
