@@ -3,7 +3,7 @@ var PropTypes = React.PropTypes;
 
 const itemDropTarget = {
   acceptDrop: function(component, item) {
-    window.alert('You dropped ' + item.name + '!');
+    component.addItem(item.name);
   }
 };
 
@@ -53,6 +53,16 @@ var Item = React.createClass({
 var Dustbin = React.createClass({
   mixins: [DragDropMixin],
 
+  getInitialState: function() {
+    return { items: [] };
+  },
+
+  addItem: function(name) {
+    clone = this.state.items.slice(0);
+    clone.push(name);
+    this.setState({ items: clone });
+  },
+
   statics: {
     configureDragDrop: function(register) {
       register(ItemTypes.ITEM, {
@@ -71,6 +81,11 @@ var Dustbin = React.createClass({
       stateClass = 'dragging';
     }
 
+    console.log(this.state.items);
+    const dropped = this.state.items.map(function(name) {
+        return <li>{name}</li>;
+    });
+
     return (
       <div className={'bin bin-state-' + stateClass}
            {...this.dropTargetFor(ItemTypes.ITEM)}>
@@ -78,6 +93,9 @@ var Dustbin = React.createClass({
           'Release to drop' :
           'Drag item here'
         }
+        <ul className="dropped">
+          {dropped}
+        </ul>
       </div>
     );
   }
