@@ -81,7 +81,6 @@ var Dustbin = React.createClass({
       stateClass = 'dragging';
     }
 
-    console.log(this.state.items);
     const dropped = this.state.items.map(function(name) {
         return <li>{name}</li>;
     });
