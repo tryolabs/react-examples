@@ -24,10 +24,6 @@ var ItemTypes = {
 var Item = React.createClass({
   mixins: [DragDropMixin],
 
-  propTypes: {
-    name: PropTypes.string.isRequired
-  },
-
   statics: {
     configureDragDrop: function(register) {
       register(ItemTypes.ITEM, {
@@ -37,9 +33,7 @@ var Item = React.createClass({
   },
 
   render: function () {
-    const name = this.props;
-    const isDragging = this.getDragState(ItemTypes.ITEM);
-    const opacity = isDragging ? 0.4 : 1;
+    const name = this.props.name;
 
     return (
       <li className='item'
