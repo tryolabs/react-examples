@@ -84,6 +84,5 @@ And finally, the items that can be dropped:
     margin: 25px 10px;
 
     border: 2px solid #E74C3C;
-    border-radius: 4px;
 }
 ```
