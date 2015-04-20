@@ -54,3 +54,36 @@ those to change the color of the bin to match the state:
     background-color: #2ECC71;
 }
 ```
+
+Since we show a list of items that have been dropped inside the bin, let's style
+that:
+
+```css
+.dropped {
+    margin: 20px 0;
+    padding: 0;
+}
+
+.dropped li {
+    list-style-type: none;
+    font-size: 0.6em;
+}
+```
+
+And finally, the items that can be dropped:
+
+```css
+.items {
+    padding: 0;
+    text-align: center;
+}
+
+.item {
+    display: inline-block;
+    padding: 20px;
+    margin: 25px 10px;
+
+    border: 2px solid #E74C3C;
+    border-radius: 4px;
+}
+```
