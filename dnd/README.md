@@ -32,6 +32,33 @@ var ItemTypes = {
 
 There's only a single type of item, `item`.
 
+Next, we define the `Item` component, and declare it draggable:
+
+```js
+var Item = React.createClass({
+  mixins: [DragDropMixin],
+
+  statics: {
+    configureDragDrop: function(register) {
+      register(ItemTypes.ITEM, {
+        dragSource: itemDragSource
+      });
+    }
+  },
+
+  render: function () {
+    const name = this.props.name;
+
+    return (
+      <li className='item'
+           {...this.dragSourceFor(ItemTypes.ITEM)}>
+        {name}
+      </li>
+    );
+  }
+});
+```
+
 ## Style
 
 Now it's time to add some CSS.
