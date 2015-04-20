@@ -113,6 +113,30 @@ var Bin = React.createClass({
 });
 ```
 
+Finally, we create a small container object for this example and render it:
+
+```js
+var Container = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <Bin />
+        <ul className='items'>
+          <Item name='Glass' />
+          <Item name='Banana' />
+          <Item name='Paper' />
+        </ul>
+      </div>
+    );
+  }
+});
+
+React.render(
+    <Container />,
+    document.body
+);
+```
+
 ## Style
 
 Now it's time to add some CSS.
