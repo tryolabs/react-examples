@@ -6,31 +6,13 @@ An example of implementing drag and drop using [React DnD][dnd].
 
 ## Components
 
-First, we declare what happens when items are dragged and dropped:
+There's only a single type of item, `item`.
 
 ```js
-const itemDropTarget = {
-  acceptDrop: function(component, item) {
-    component.addItem(item.name);
-  }
-};
-
-const itemDragSource = {
-  beginDrag: function(component) {
-    return {
-      item: {
-        name: component.props.name
-      }
-    };
-  }
-};
-
 var ItemTypes = {
     ITEM: 'item'
 };
 ```
-
-There's only a single type of item, `item`.
 
 Next, we define the `Item` component, and declare it draggable:
 
@@ -41,7 +23,15 @@ var Item = React.createClass({
   statics: {
     configureDragDrop: function(register) {
       register(ItemTypes.ITEM, {
-        dragSource: itemDragSource
+        dragSource: {
+          beginDrag: function(component) {
+            return {
+              item: {
+                name: component.props.name
+              }
+            };
+          }
+        }
       });
     }
   },
@@ -51,7 +41,7 @@ var Item = React.createClass({
 
     return (
       <li className='item'
-           {...this.dragSourceFor(ItemTypes.ITEM)}>
+        {...this.dragSourceFor(ItemTypes.ITEM)}>
         {name}
       </li>
     );
@@ -78,7 +68,11 @@ var Bin = React.createClass({
   statics: {
     configureDragDrop: function(register) {
       register(ItemTypes.ITEM, {
-        dropTarget: itemDropTarget
+        dropTarget: {
+          acceptDrop: function(component, item) {
+            component.addItem(item.name);
+          }
+        }
       });
     }
   },
@@ -94,16 +88,15 @@ var Bin = React.createClass({
     }
 
     const dropped = this.state.items.map(function(name) {
-        return <li>{name}</li>;
+      return <li>{name}</li>;
     });
 
     return (
       <div className={'bin bin-state-' + stateClass}
-           {...this.dropTargetFor(ItemTypes.ITEM)}>
+        {...this.dropTargetFor(ItemTypes.ITEM)}>
         {dropState.isHovering ?
-          'Release to drop' :
-          'Drag item here'
-        }
+         'Release to drop' :
+         'Drag item here'}
         <ul className="dropped">
           {dropped}
         </ul>
