@@ -59,6 +59,60 @@ var Item = React.createClass({
 });
 ```
 
+Now we define the component we can drop objects into:
+
+```js
+var Bin = React.createClass({
+  mixins: [DragDropMixin],
+
+  getInitialState: function() {
+    return { items: [] };
+  },
+
+  addItem: function(name) {
+    clone = this.state.items.slice(0);
+    clone.push(name);
+    this.setState({ items: clone });
+  },
+
+  statics: {
+    configureDragDrop: function(register) {
+      register(ItemTypes.ITEM, {
+        dropTarget: itemDropTarget
+      });
+    }
+  },
+
+  render: function() {
+    const dropState = this.getDropState(ItemTypes.ITEM);
+
+    var stateClass = 'none';
+    if (dropState.isHovering) {
+      stateClass = 'hovering';
+    } else if (dropState.isDragging) {
+      stateClass = 'dragging';
+    }
+
+    const dropped = this.state.items.map(function(name) {
+        return <li>{name}</li>;
+    });
+
+    return (
+      <div className={'bin bin-state-' + stateClass}
+           {...this.dropTargetFor(ItemTypes.ITEM)}>
+        {dropState.isHovering ?
+          'Release to drop' :
+          'Drag item here'
+        }
+        <ul className="dropped">
+          {dropped}
+        </ul>
+      </div>
+    );
+  }
+});
+```
+
 ## Style
 
 Now it's time to add some CSS.
