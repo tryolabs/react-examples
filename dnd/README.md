@@ -49,7 +49,9 @@ var Item = React.createClass({
 });
 ```
 
-Now we define the component we can drop objects into:
+Now we define the component we can drop objects into. The `Bin` component has a
+list of dropped items in its state, and an `addItem` method which takes the name
+of an item to add to that list.
 
 ```js
 var Bin = React.createClass({
@@ -64,7 +66,11 @@ var Bin = React.createClass({
     clone.push(name);
     this.setState({ items: clone });
   },
+```
 
+Then we have the `statics` field, which calls `addItem` when an object is dropped into the bin:
+
+```js
   statics: {
     configureDragDrop: function(register) {
       register(ItemTypes.ITEM, {
@@ -76,7 +82,21 @@ var Bin = React.createClass({
       });
     }
   },
+```
 
+Here we have the render function. We look at the component's drop state to see whether:
+
+* Nothing is happening.
+* A droppable object is being dragged.
+* A droppable object hsa been dragged over the component.
+
+We use this to change the component's class name, then later we'll use CSS to
+style it.
+
+We also query the component's drop state to determine whether the text on the
+bin should read "Release to drop: or "Drag item here".
+
+```js
   render: function() {
     const dropState = this.getDropState(ItemTypes.ITEM);
 
