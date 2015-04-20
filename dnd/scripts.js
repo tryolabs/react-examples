@@ -1,24 +1,8 @@
 var DragDropMixin = ReactDND.DragDropMixin;
 var PropTypes = React.PropTypes;
 
-const itemDropTarget = {
-  acceptDrop: function(component, item) {
-    component.addItem(item.name);
-  }
-};
-
-const itemDragSource = {
-  beginDrag: function(component) {
-    return {
-      item: {
-        name: component.props.name
-      }
-    };
-  }
-};
-
 var ItemTypes = {
-    ITEM: 'item'
+  ITEM: 'item'
 };
 
 var Item = React.createClass({
@@ -27,7 +11,15 @@ var Item = React.createClass({
   statics: {
     configureDragDrop: function(register) {
       register(ItemTypes.ITEM, {
-        dragSource: itemDragSource
+        dragSource: {
+          beginDrag: function(component) {
+            return {
+              item: {
+                name: component.props.name
+              }
+            };
+          }
+        }
       });
     }
   },
@@ -37,7 +29,7 @@ var Item = React.createClass({
 
     return (
       <li className='item'
-           {...this.dragSourceFor(ItemTypes.ITEM)}>
+        {...this.dragSourceFor(ItemTypes.ITEM)}>
         {name}
       </li>
     );
@@ -60,7 +52,11 @@ var Bin = React.createClass({
   statics: {
     configureDragDrop: function(register) {
       register(ItemTypes.ITEM, {
-        dropTarget: itemDropTarget
+        dropTarget: {
+          acceptDrop: function(component, item) {
+            component.addItem(item.name);
+          }
+        }
       });
     }
   },
@@ -76,16 +72,15 @@ var Bin = React.createClass({
     }
 
     const dropped = this.state.items.map(function(name) {
-        return <li>{name}</li>;
+      return <li>{name}</li>;
     });
 
     return (
       <div className={'bin bin-state-' + stateClass}
-           {...this.dropTargetFor(ItemTypes.ITEM)}>
+        {...this.dropTargetFor(ItemTypes.ITEM)}>
         {dropState.isHovering ?
-          'Release to drop' :
-          'Drag item here'
-        }
+         'Release to drop' :
+         'Drag item here'}
         <ul className="dropped">
           {dropped}
         </ul>
@@ -101,7 +96,7 @@ var Container = React.createClass({
         <Bin />
         <ul className='items'>
           <Item name='Glass' />
-          <Item name='Banana' />
+          <Item name='Metal' />
           <Item name='Paper' />
         </ul>
       </div>
@@ -110,6 +105,6 @@ var Container = React.createClass({
 });
 
 React.render(
-    <Container />,
-    document.body
+  <Container />,
+  document.body
 );
