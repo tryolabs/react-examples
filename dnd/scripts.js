@@ -44,7 +44,7 @@ var Item = React.createClass({
   }
 });
 
-var Dustbin = React.createClass({
+var Bin = React.createClass({
   mixins: [DragDropMixin],
 
   getInitialState: function() {
@@ -98,7 +98,7 @@ var Container = React.createClass({
   render: function() {
     return (
       <div>
-        <Dustbin />
+        <Bin />
         <ul className='items'>
           <Item name='Glass' />
           <Item name='Banana' />
