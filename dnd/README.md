@@ -6,6 +6,32 @@ An example of implementing drag and drop using [React DnD][dnd].
 
 ## Components
 
+First, we declare what happens when items are dragged and dropped:
+
+```js
+const itemDropTarget = {
+  acceptDrop: function(component, item) {
+    component.addItem(item.name);
+  }
+};
+
+const itemDragSource = {
+  beginDrag: function(component) {
+    return {
+      item: {
+        name: component.props.name
+      }
+    };
+  }
+};
+
+var ItemTypes = {
+    ITEM: 'item'
+};
+```
+
+There's only a single type of item, `item`.
+
 ## Style
 
 Now it's time to add some CSS.
