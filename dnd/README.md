@@ -137,7 +137,8 @@ bin should read "Release to drop: or "Drag item here".
 });
 ```
 
-Finally, we create a small container object for this example and render it:
+Finally, we create a small container object for this example and add some
+example items:
 
 ```js
 var Container = React.createClass({
