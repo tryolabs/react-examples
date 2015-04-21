@@ -1,7 +1,7 @@
 var DragDropMixin = ReactDND.DragDropMixin;
 var PropTypes = React.PropTypes;
 
-var ItemTypes = {
+const ItemTypes = {
   ITEM: 'item'
 };
 
