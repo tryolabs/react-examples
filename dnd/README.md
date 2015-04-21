@@ -17,7 +17,7 @@ different types of item in the `ItemTypes` object, which is simple since in this
 example we only have one type of draggable item:
 
 ```js
-var ItemTypes = {
+const ItemTypes = {
     ITEM: 'item'
 };
 ```
