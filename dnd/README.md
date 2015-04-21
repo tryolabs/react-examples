@@ -78,7 +78,8 @@ var Bin = React.createClass({
   },
 ```
 
-Then we have the `statics` field, which calls `addItem` when an object is dropped into the bin:
+Now we register the `dropTarget` function, which calls `addItem` when an object
+is dropped into the bin:
 
 ```js
   statics: {
