@@ -8,7 +8,13 @@ is the first example where we'll use an external library, in this case,
 
 ## Components
 
-There's only a single type of item, `item`.
+This example will have two major components: `Bin`, a component where objects
+can be dropped, and `Item`, an item that can be dragged and dropped.
+
+React DND, as you would expect, supports applying different functionality to
+different sets of data that is to be dragged and dropped. We declare the
+different types of item in the `ItemTypes` object, which is simple since in this
+example we only have one type of draggable item:
 
 ```js
 var ItemTypes = {
