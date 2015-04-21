@@ -1,5 +1,7 @@
 # Drag and Drop
 
+![Screenshot](screenshot.png)
+
 This is an example of implementing drag and drop functionality using React. This
 is the first example where we'll use an external library, in this case,
 [React DnD][dnd].
