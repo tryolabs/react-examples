@@ -49,12 +49,10 @@ var Item = React.createClass({
   },
 
   render: function () {
-    const name = this.props.name;
-
     return (
       <li className='item'
         {...this.dragSourceFor(ItemTypes.ITEM)}>
-        {name}
+        {this.props.name}
       </li>
     );
   }
