@@ -1,6 +1,8 @@
 # Drag and Drop
 
-An example of implementing drag and drop using [React DnD][dnd].
+This is an example of implementing drag and drop functionality using React. This
+is the first example where we'll use an external library, in this case,
+[React DnD][dnd].
 
 [dnd]: https://github.com/gaearon/react-dnd
 
