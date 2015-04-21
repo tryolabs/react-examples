@@ -24,7 +24,7 @@ const ItemTypes = {
 };
 ```
 
-Next, we define the `Item` component, and declare it draggable. Because React
+First, we define the `Item` component, and declare it draggable. Because React
 DND, like the underlying HTML5 drag-and-drop API, supports dragging *data* as
 well as visible objects, we have to decalare what kind of data should be moved
 along with the component. The `beginDrag` function does it, and in this case we
@@ -61,7 +61,7 @@ var Item = React.createClass({
 });
 ```
 
-Now we define the component we can drop objects into. The `Bin` component has a
+Next we define the component we can drop objects into. The `Bin` component has a
 list of dropped items in its state, and an `addItem` method which takes the name
 of an item to add to that list.
 
