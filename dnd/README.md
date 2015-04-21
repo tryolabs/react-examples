@@ -22,7 +22,11 @@ const ItemTypes = {
 };
 ```
 
-Next, we define the `Item` component, and declare it draggable:
+Next, we define the `Item` component, and declare it draggable. Because React
+DND, like the underlying HTML5 drag-and-drop API, supports dragging *data* as
+well as visible objects, we have to decalare what kind of data should be moved
+along with the component. The `beginDrag` function does it, and in this case we
+only carry the component's name, since it's the only data it has.
 
 ```js
 var Item = React.createClass({
