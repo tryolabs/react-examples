@@ -26,7 +26,8 @@ var Task = React.createClass({
 
   render: function() {
     return (
-      <li className="task" {...this.dragSourceFor(ItemTypes.TASK)}>
+      <li className="task"
+          {...this.dragSourceFor(ItemTypes.TASK)}>
         {this.props.text}
         <span className="delete"
               onClick={this.props.deleteTask} />
@@ -84,14 +85,14 @@ var TaskDropBin = React.createClass({
       stateClass = 'dragging';
     }
 
-    return <div className={"drop drop-state-" + stateClass}>
+    return <div className={"drop drop-state-" + stateClass}
+                {...this.dropTargetFor(ItemTypes.TASK)}>
       Drop here
     </div>;
   }
 });
 
 var TaskList = React.createClass({
-
   getInitialState: function() {
     return { tasks: this.props.tasks };
   },
