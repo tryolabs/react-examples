@@ -1,3 +1,10 @@
+var DragDropMixin = ReactDND.DragDropMixin;
+var PropTypes = React.PropTypes;
+
+const ItemTypes = {
+  TASK: 'task'
+};
+
 var Task = React.createClass({
   render: function() {
     return (
