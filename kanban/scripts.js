@@ -75,7 +75,18 @@ var TaskDropBin = React.createClass({
   },
 
   render: function() {
-    return <div className="task-drop-bin">Drop here</div>;
+    const dropState = this.getDropState(ItemTypes.TASK);
+
+    var stateClass = 'none';
+    if (dropState.isHovering) {
+      stateClass = 'hovering';
+    } else if (dropState.isDragging) {
+      stateClass = 'dragging';
+    }
+
+    return <div className={"drop drop-state-" + stateClass}>
+      Drop here
+    </div>;
   }
 });
 
