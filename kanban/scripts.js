@@ -14,7 +14,7 @@ var Task = React.createClass({
         dragSource: {
           beginDrag: function(component) {
             return {
-              item: {
+              task: {
                 name: component.props.text
               }
             };
@@ -60,6 +60,18 @@ var AddTask = React.createClass({
 
 var TaskDropBin = React.createClass({
   mixins: [DragDropMixin],
+
+  statics: {
+    configureDragDrop: function(register) {
+      register(ItemTypes.TASK, {
+        dropTarget: {
+          acceptDrop: function(component, task) {
+            component.props.list.addTask(task.text);
+          }
+        }
+      });
+    }
+  },
 
 };
 
