@@ -21,7 +21,7 @@ body {
 .drop {
     width: 100%;
     text-align: center;
-    font-style: bold;
+    font-weight: bold;
     padding: 15px 0;
 }
 
