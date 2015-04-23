@@ -14,7 +14,7 @@ var Task = React.createClass({
         dragSource: {
           beginDrag: function(component) {
             return {
-              task: {
+              item: {
                 name: component.props.text
               }
             };
@@ -65,15 +65,19 @@ var TaskDropBin = React.createClass({
     configureDragDrop: function(register) {
       register(ItemTypes.TASK, {
         dropTarget: {
-          acceptDrop: function(component, task) {
-            component.props.list.addTask(task.text);
+          acceptDrop: function(component, item) {
+            /* When a task is dropped, add it to the parent task list */
+            component.props.list.addTask(item.text);
           }
         }
       });
     }
   },
 
-};
+  render: function() {
+    return <div className="task-drop-bin">Drop here</div>;
+  }
+});
 
 var TaskList = React.createClass({
 
