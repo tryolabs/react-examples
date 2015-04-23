@@ -6,9 +6,27 @@ const ItemTypes = {
 };
 
 var Task = React.createClass({
+  mixins: [DragDropMixin],
+
+  statics: {
+    configureDragDrop: function(register) {
+      register(ItemTypes.TASK, {
+        dragSource: {
+          beginDrag: function(component) {
+            return {
+              item: {
+                name: component.props.text
+              }
+            };
+          }
+        }
+      });
+    }
+  },
+
   render: function() {
     return (
-      <li className="task">
+      <li className="task" {...this.dragSourceFor(ItemTypes.TASK)}>
         {this.props.text}
         <span className="delete"
               onClick={this.props.deleteTask} />
