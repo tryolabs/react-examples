@@ -58,22 +58,15 @@ var AddTask = React.createClass({
   }
 });
 
-var TaskList = React.createClass({
+var TaskDropBin = React.createClass({
   mixins: [DragDropMixin],
+
+};
+
+var TaskList = React.createClass({
 
   getInitialState: function() {
     return { tasks: this.props.tasks };
-  },
-
-  statics: {
-    configureDragDrop: function(register) {
-      register(ItemTypes.TASK, {
-        dropTarget: {
-          acceptDrop: function(component, item) {
-          }
-        }
-      });
-    }
   },
 
   deleteTask: function(id) {
@@ -118,6 +111,7 @@ var TaskList = React.createClass({
         <ul className="list-tasks">
           {task_list}
         </ul>
+        <TaskDropBin list={this} />
         <AddTask addTask={self.addTask} />
       </div>
     );
