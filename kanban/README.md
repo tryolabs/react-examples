@@ -2,6 +2,11 @@
 
 ![Screenshot of the app](img/kanban.png)
 
+This example is basically a [Trello][trello] clone: We have a set of lists of
+tasks ("Todo", "Done"), and each holds some tasks. We can add tasks, delete
+them, or drag them from one list to the other. We'll [React DnD][dnd] for
+drag-and-drop and a simple Python server for persistence.
+
 ## The Server
 
 We'll be using [Flask][flask] for the server, since we don't need much. First,
@@ -185,3 +190,5 @@ body {
 ```
 
 [flask]: http://flask.pocoo.org/
+[trello]: https://trello.com/
+[dnd]: https://github.com/gaearon/react-dnd
