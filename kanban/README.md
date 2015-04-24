@@ -205,6 +205,8 @@ states, we change the color:
 }
 ```
 
+Finally, some style for the individual tasks:
+
 ```css
 .task {
     list-style-type: none;
@@ -213,7 +215,12 @@ states, we change the color:
     padding: 10px;
     margin-bottom: 10px;
 }
+```
 
+We use the content property to put a Unicode times symbol and make a neat little
+delete button:
+
+```css
 .delete:before {
     content: "×";
 }
