@@ -15,7 +15,7 @@ var Task = React.createClass({
           beginDrag: function(component) {
             return {
               item: {
-                name: component.props.text
+                text: component.props.text
               }
             };
           }
