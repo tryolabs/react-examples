@@ -134,14 +134,28 @@ if __name__ == "__main__":
 
 ![Component structure](img/structure.png)
 
+First, let's import the DragDropMixin:
+
 ```js
 var DragDropMixin = ReactDND.DragDropMixin;
-var PropTypes = React.PropTypes;
+```
 
+Since we're only moving one type of component, tasks, we declare that:
+
+```js
 const ItemTypes = {
   TASK: 'task'
 };
+```
 
+First, we define the `Task` component. Since we're going to be dragging it from
+task list to task list, we use the `DragDropMixin`.
+
+We then implement the `beginDrag` function and register it with React
+DnD. Whenever a task is dragged, we carry the task's text and deletion callback
+along with it.
+
+```js
 var Task = React.createClass({
   mixins: [DragDropMixin],
 
@@ -173,7 +187,12 @@ var Task = React.createClass({
     );
   }
 });
+```
 
+Then we implement `AddTask`, a sub component of `TaskList` for adding new tasks
+to the task list:
+
+```js
 var AddTask = React.createClass({
   getInitialState: function() {
     return { text: "" };
@@ -196,7 +215,12 @@ var AddTask = React.createClass({
     );
   }
 });
+```
 
+The `TaskDropBin` is the component in a `TaskList` where tasks being dragged can
+be dropped into:
+
+```js
 var TaskDropBin = React.createClass({
   mixins: [DragDropMixin],
 
@@ -230,7 +254,13 @@ var TaskDropBin = React.createClass({
     </div>;
   }
 });
+```
 
+Finally, the task list itself. The `deleteTask` and `addTask` methods send
+requests to the server to carry out the operations in the backend so data
+remains consistent.
+
+```js
 var TaskList = React.createClass({
   getInitialState: function() {
     return { tasks: this.props.tasks };
@@ -284,7 +314,11 @@ var TaskList = React.createClass({
     );
   }
 });
+```
 
+Finally, the app component. This is just a wrapper around the others.
+
+```
 var App = React.createClass({
   render: function() {
     var lists = this.props.lists.map(function(list, index) {
@@ -302,7 +336,12 @@ var App = React.createClass({
     );
  }
 });
+```
 
+Once the document has loaded, we ask the server for the initial state of the
+board, and render that:
+
+```js
 $(document).ready(function() {
   $.getJSON('http://localhost:8000/api/board', function(data) {
     React.render(
