@@ -15,7 +15,8 @@ var Task = React.createClass({
           beginDrag: function(component) {
             return {
               item: {
-                text: component.props.text
+                text: component.props.text,
+                deleteTask: component.props.deleteTask
               }
             };
           }
@@ -68,6 +69,7 @@ var TaskDropBin = React.createClass({
         dropTarget: {
           acceptDrop: function(component, item) {
             /* When a task is dropped, add it to the parent task list */
+            item.deleteTask();
             component.props.list.addTask(item.text);
           }
         }
