@@ -2,10 +2,6 @@
 
 ![Screenshot of the app](img/kanban.png)
 
-This example will be, essentially, an underpowered Trello clone. Here we'll
-actually run a server and implement persistent storage of new tasks and
-deletion.
-
 ## The Server
 
 We'll be using [Flask][flask] for the server, since we don't need much. First,
@@ -286,6 +282,8 @@ $(document).ready(function() {
   });
 });
 ```
+
+## Style
 
 And finally, some style:
 
