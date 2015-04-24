@@ -161,6 +161,25 @@ body {
     border-radius: 5px;
 }
 
+.drop {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    padding: 15px 0;
+}
+
+.drop-state-none {
+    display: none;
+}
+
+.drop-state-dragging {
+    background-color: #E98B39;
+}
+
+.drop-state-hovering {
+    background-color: #2ECC71;
+}
+
 .list-title {
     margin: 0;
     text-align: center;
