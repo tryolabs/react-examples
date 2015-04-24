@@ -164,6 +164,15 @@ Next, we style the task lists:
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+.list-title {
+    margin: 0;
+    text-align: center;
+}
+
+.list-tasks {
+    padding: 0;
+}
 ```
 
 The task list's drop target is just a big rectangle with the text "Drop here",
@@ -197,15 +206,6 @@ states, we change the color:
 ```
 
 ```css
-.list-title {
-    margin: 0;
-    text-align: center;
-}
-
-.list-tasks {
-    padding: 0;
-}
-
 .task {
     list-style-type: none;
     border: 1px solid #ccc;

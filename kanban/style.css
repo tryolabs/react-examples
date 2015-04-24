@@ -18,6 +18,15 @@ body {
     border-radius: 5px;
 }
 
+.list-title {
+    margin: 0;
+    text-align: center;
+}
+
+.list-tasks {
+    padding: 0;
+}
+
 .drop {
     width: 100%;
     text-align: center;
@@ -35,15 +44,6 @@ body {
 
 .drop-state-hovering {
     background-color: #2ECC71;
-}
-
-.list-title {
-    margin: 0;
-    text-align: center;
-}
-
-.list-tasks {
-    padding: 0;
 }
 
 .task {
