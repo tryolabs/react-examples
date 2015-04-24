@@ -138,7 +138,7 @@ if __name__ == "__main__":
 
 ## Style
 
-And finally, some style:
+And finally, we add some style. First, general `body` style;)
 
 ```css
 @charset "utf-8";
@@ -147,7 +147,11 @@ body {
     margin: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+```
 
+Next, we style the task lists:
+
+```css
 .lists {
     padding: 50px;
 }
@@ -160,14 +164,25 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+```
 
+The task list's drop target is just a big rectangle with the text "Drop here",
+so that's not very complicated:
+
+```css
 .drop {
     width: 100%;
     text-align: center;
     font-weight: bold;
     padding: 15px 0;
 }
+```
 
+Since we change the class of the drop bin depending on its state, we use this
+state to style it. When the state is `none`, we hide it, on the two other
+states, we change the color:
+
+```css
 .drop-state-none {
     display: none;
 }
@@ -179,7 +194,9 @@ body {
 .drop-state-hovering {
     background-color: #2ECC71;
 }
+```
 
+```css
 .list-title {
     margin: 0;
     text-align: center;
