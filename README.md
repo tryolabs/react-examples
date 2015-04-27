@@ -4,18 +4,17 @@ Examples of working with [React][react].
 
 # Examples
 
+Unless explicitly stated, all of these can be run by running `./run_server.sh`
+on their directory.
+
 ## [Mailbox][mailbox]
 
 A static email client, this is basically the simplest React app that implements
 callbacks and event handlers.
 
-To run, run `./run_server.sh`.
-
 ## [Modal][modal]
 
 A reusable modal component.
-
-To run, run `./run_server.sh`.
 
 ## [Drag and Drop][dnd]
 
