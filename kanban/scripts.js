@@ -1,7 +1,33 @@
+var DragDropMixin = ReactDND.DragDropMixin;
+
+const ItemTypes = {
+  TASK: 'task'
+};
+
 var Task = React.createClass({
+  mixins: [DragDropMixin],
+
+  statics: {
+    configureDragDrop: function(register) {
+      register(ItemTypes.TASK, {
+        dragSource: {
+          beginDrag: function(component) {
+            return {
+              item: {
+                text: component.props.text,
+                deleteTask: component.props.deleteTask
+              }
+            };
+          }
+        }
+      });
+    }
+  },
+
   render: function() {
     return (
-      <li className="task">
+      <li className="task"
+          {...this.dragSourceFor(ItemTypes.TASK)}>
         {this.props.text}
         <span className="delete"
               onClick={this.props.deleteTask} />
@@ -30,6 +56,40 @@ var AddTask = React.createClass({
         </button>
       </div>
     );
+  }
+});
+
+var TaskDropBin = React.createClass({
+  mixins: [DragDropMixin],
+
+  statics: {
+    configureDragDrop: function(register) {
+      register(ItemTypes.TASK, {
+        dropTarget: {
+          acceptDrop: function(component, item) {
+            /* When a task is dropped, add it to the parent task list */
+            item.deleteTask();
+            component.props.list.addTask(item.text);
+          }
+        }
+      });
+    }
+  },
+
+  render: function() {
+    const dropState = this.getDropState(ItemTypes.TASK);
+
+    var stateClass = 'none';
+    if (dropState.isHovering) {
+      stateClass = 'hovering';
+    } else if (dropState.isDragging) {
+      stateClass = 'dragging';
+    }
+
+    return <div className={"drop drop-state-" + stateClass}
+                {...this.dropTargetFor(ItemTypes.TASK)}>
+      Drop here
+    </div>;
   }
 });
 
@@ -80,6 +140,7 @@ var TaskList = React.createClass({
         <ul className="list-tasks">
           {task_list}
         </ul>
+        <TaskDropBin list={this} />
         <AddTask addTask={self.addTask} />
       </div>
     );

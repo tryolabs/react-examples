@@ -2,9 +2,10 @@
 
 ![Screenshot of the app](img/kanban.png)
 
-This example will be, essentially, an underpowered Trello clone. Here we'll
-actually run a server and implement persistent storage of new tasks and
-deletion.
+This example is basically a [Trello][trello] clone: We have a set of lists of
+tasks ("Todo", "Done"), and each holds some tasks. We can add tasks, delete
+them, or drag them from one list to the other. We'll [React DnD][dnd] for
+drag-and-drop and a simple Python server for persistence.
 
 ## The Server
 
@@ -133,14 +134,52 @@ if __name__ == "__main__":
 
 ![Component structure](img/structure.png)
 
-The `<Task>` component is very simple, all it does is display its contents and a
-little button to call a deletion callback.
+First, let's import the DragDropMixin:
 
-```javascript
+```js
+var DragDropMixin = ReactDND.DragDropMixin;
+```
+
+Since we're only moving one type of component, tasks, we declare that:
+
+```js
+const ItemTypes = {
+  TASK: 'task'
+};
+```
+
+First, we define the `Task` component. Since we're going to be dragging it from
+task list to task list, we use the `DragDropMixin`.
+
+We then implement the `beginDrag` function and register it with React
+DnD. Whenever a task is dragged, we carry the task's text and deletion callback
+along with it.
+
+```js
 var Task = React.createClass({
+  mixins: [DragDropMixin],
+
+  statics: {
+    configureDragDrop: function(register) {
+      register(ItemTypes.TASK, {
+        dragSource: {
+          beginDrag: function(component) {
+            return {
+              item: {
+                text: component.props.text,
+                deleteTask: component.props.deleteTask
+              }
+            };
+          }
+        }
+      });
+    }
+  },
+
   render: function() {
     return (
-      <li className="task">
+      <li className="task"
+          {...this.dragSourceFor(ItemTypes.TASK)}>
         {this.props.text}
         <span className="delete"
               onClick={this.props.deleteTask} />
@@ -150,11 +189,10 @@ var Task = React.createClass({
 });
 ```
 
-The `<AddTask>` component is just an input box and a button. When you write
-text, it adds it to the internal `text` state, and when you click on the button,
-it calls an `addTask` callback with the new task's text.
+Then we implement `AddTask`, a sub component of `TaskList` for adding new tasks
+to the task list:
 
-```javascript
+```js
 var AddTask = React.createClass({
   getInitialState: function() {
     return { text: "" };
@@ -179,18 +217,50 @@ var AddTask = React.createClass({
 });
 ```
 
-The `<TaskList>` component has a single item of state, a list of tasks, and two
-methods for deleting and adding tasks. The `deleteTask` method just takes the ID
-of the pat to delete, uses jQuery to send the appropriate `DELETE` request, then
-removes the matching task from the list.
+The `TaskDropBin` is the component in a `TaskList` where tasks being dragged can
+be dropped into:
 
-This isn't quite optimistic updating, since it requires the request to at least
-reach the server and receive a reply -- even if it fails.
+```js
+var TaskDropBin = React.createClass({
+  mixins: [DragDropMixin],
 
-The `addTask` method does just what you'd expect, sending a request then
-expanding the tasks list.
+  statics: {
+    configureDragDrop: function(register) {
+      register(ItemTypes.TASK, {
+        dropTarget: {
+          acceptDrop: function(component, item) {
+            /* When a task is dropped, add it to the parent task list */
+            item.deleteTask();
+            component.props.list.addTask(item.text);
+          }
+        }
+      });
+    }
+  },
 
-```javascript
+  render: function() {
+    const dropState = this.getDropState(ItemTypes.TASK);
+
+    var stateClass = 'none';
+    if (dropState.isHovering) {
+      stateClass = 'hovering';
+    } else if (dropState.isDragging) {
+      stateClass = 'dragging';
+    }
+
+    return <div className={"drop drop-state-" + stateClass}
+                {...this.dropTargetFor(ItemTypes.TASK)}>
+      Drop here
+    </div>;
+  }
+});
+```
+
+Finally, the task list itself. The `deleteTask` and `addTask` methods send
+requests to the server to carry out the operations in the backend so data
+remains consistent.
+
+```js
 var TaskList = React.createClass({
   getInitialState: function() {
     return { tasks: this.props.tasks };
@@ -220,39 +290,35 @@ var TaskList = React.createClass({
       }
     });
   },
+
+  render: function() {
+    var self = this;
+    var task_list = this.state.tasks.map(function(task, index) {
+      return (
+        <Task key={index}
+              text={task.text}
+              deleteTask={self.deleteTask.bind(self, index)} />
+      );
+    });
+    return (
+      <div className="task-list">
+        <h1 className="list-title">
+          {this.props.name}
+        </h1>
+        <ul className="list-tasks">
+          {task_list}
+        </ul>
+        <TaskDropBin list={this} />
+        <AddTask addTask={self.addTask} />
+      </div>
+    );
+  }
 });
 ```
 
-The `render` method:
+Finally, the app component. This is just a wrapper around the others.
 
-```javascript
-render: function() {
-  var self = this;
-  var task_list = this.state.tasks.map(function(task, index) {
-    return (
-      <Task key={index}
-            text={task.text}
-            deleteTask={self.deleteTask.bind(self, index)} />
-    );
-  });
-  return (
-    <div className="task-list">
-      <h1 className="list-title">
-        {this.props.name}
-      </h1>
-      <ul className="list-tasks">
-        {task_list}
-      </ul>
-      <AddTask addTask={self.addTask} />
-    </div>
-  );
-}
 ```
-
-The `<App>` component, in this example, has no methods other than `render`,
-which just displays a list of `<TaskList>` components.
-
-```javascript
 var App = React.createClass({
   render: function() {
     var lists = this.props.lists.map(function(list, index) {
@@ -272,11 +338,10 @@ var App = React.createClass({
 });
 ```
 
+Once the document has loaded, we ask the server for the initial state of the
+board, and render that:
 
-Now, we render everything. First we call `/api/board` to get the initial state
-of the board, and use this to render the `<App>` component.
-
-```javascript
+```js
 $(document).ready(function() {
   $.getJSON('http://localhost:8000/api/board', function(data) {
     React.render(
@@ -287,7 +352,9 @@ $(document).ready(function() {
 });
 ```
 
-And finally, some style:
+## Style
+
+And finally, we add some style. First, general `body` style;)
 
 ```css
 @charset "utf-8";
@@ -296,7 +363,11 @@ body {
     margin: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+```
 
+Next, we style the task lists:
+
+```css
 .lists {
     padding: 50px;
 }
@@ -318,7 +389,41 @@ body {
 .list-tasks {
     padding: 0;
 }
+```
 
+The task list's drop target is just a big rectangle with the text "Drop here",
+so that's not very complicated:
+
+```css
+.drop {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    padding: 15px 0;
+}
+```
+
+Since we change the class of the drop bin depending on its state, we use this
+state to style it. When the state is `none`, we hide it, on the two other
+states, we change the color:
+
+```css
+.drop-state-none {
+    display: none;
+}
+
+.drop-state-dragging {
+    background-color: #E98B39;
+}
+
+.drop-state-hovering {
+    background-color: #2ECC71;
+}
+```
+
+Finally, some style for the individual tasks:
+
+```css
 .task {
     list-style-type: none;
     border: 1px solid #ccc;
@@ -326,7 +431,12 @@ body {
     padding: 10px;
     margin-bottom: 10px;
 }
+```
 
+We use the content property to put a Unicode times symbol and make a neat little
+delete button:
+
+```css
 .delete:before {
     content: "×";
 }
@@ -339,3 +449,5 @@ body {
 ```
 
 [flask]: http://flask.pocoo.org/
+[trello]: https://trello.com/
+[dnd]: https://github.com/gaearon/react-dnd
