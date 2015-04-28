@@ -256,16 +256,20 @@ var TaskDropBin = React.createClass({
 });
 ```
 
-Finally, the task list itself. The `deleteTask` and `addTask` methods send
-requests to the server to carry out the operations in the backend so data
-remains consistent.
+Finally, the task list itself. Since it holds a list of tasks which can be
+deleted, and to which new ones can be added, we make that a big of state:
 
 ```js
 var TaskList = React.createClass({
   getInitialState: function() {
     return { tasks: this.props.tasks };
   },
+```
 
+The `deleteTask` and `addTask` methods send requests to the server to carry out
+the operations in the backend so data remains consistent.
+
+```js
   deleteTask: function(id) {
     var self = this;
     $.ajax({
