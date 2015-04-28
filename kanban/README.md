@@ -134,7 +134,7 @@ if __name__ == "__main__":
 
 ![Component structure](img/structure.png)
 
-First, let's import the DragDropMixin:
+First, let's import the `DragDropMixin`:
 
 ```js
 var DragDropMixin = ReactDND.DragDropMixin;
@@ -341,7 +341,7 @@ component.
 Finally, the app component. This is just a wrapper around the other components
 that wraps `TaskList` components in a `div`.
 
-```
+```js
 var App = React.createClass({
   render: function() {
     var lists = this.props.lists.map(function(list, index) {
