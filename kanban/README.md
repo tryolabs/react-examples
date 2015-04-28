@@ -218,7 +218,13 @@ var AddTask = React.createClass({
 ```
 
 The `TaskDropBin` is the component in a `TaskList` where tasks being dragged can
-be dropped into:
+be dropped into.
+
+The `acceptDrop` function takes a component (The drop bin itself) and an item,
+which is a JavaScript object representing the data being dragged. We call the
+item's `deleteTask` method, which removes it from its original list, and call
+the `addTask` method of the drop bin's parent task list to add the task to the
+list.
 
 ```js
 var TaskDropBin = React.createClass({
