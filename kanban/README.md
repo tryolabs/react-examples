@@ -354,7 +354,7 @@ $(document).ready(function() {
 
 ## Style
 
-And finally, we add some style. First, general `body` style;)
+And finally, we add some style. First, general `body` style:
 
 ```css
 @charset "utf-8";
