@@ -294,7 +294,13 @@ the operations in the backend so data remains consistent.
       }
     });
   },
+```
 
+Now we have the render function, which builds up the list of `Task` components
+along with other things, like the list's title, its task drop bin and `AddTask`
+component.
+
+```js
   render: function() {
     var self = this;
     var task_list = this.state.tasks.map(function(task, index) {
