@@ -403,9 +403,10 @@ so that's not very complicated:
 }
 ```
 
-Since we change the class of the drop bin depending on its state, we use this
-state to style it. When the state is `none`, we hide it, on the two other
-states, we change the color:
+Since we change the class of the task list's drop bin depending on its state, we
+use this state to style it. When the state is `none`, we hide it, on the two
+other states, we change the color: Orange when a task is being dragged around,
+and green when it is hovering over a drop bin.
 
 ```css
 .drop-state-none {
