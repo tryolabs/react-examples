@@ -243,7 +243,13 @@ var TaskDropBin = React.createClass({
       });
     }
   },
+```
 
+We query the component's drop state and set its class name accordingly. We'll
+later use this to decide whether to show or hide it, and change its color to let
+the user know when they can drop a component into the bin.
+
+```js
   render: function() {
     const dropState = this.getDropState(ItemTypes.TASK);
 
