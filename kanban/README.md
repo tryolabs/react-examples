@@ -391,8 +391,8 @@ Next, we style the task lists:
 }
 ```
 
-The task list's drop target is just a big rectangle with the text "Drop here",
-so that's not very complicated:
+The task list's drop bin is just a big rectangle with the text "Drop here",
+which is not very complicated to style:
 
 ```css
 .drop {
