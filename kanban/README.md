@@ -433,8 +433,8 @@ Finally, some style for the individual tasks:
 }
 ```
 
-We use the content property to put a Unicode times symbol and make a neat little
-delete button:
+And we use the CSS [content property][content-prop] to put a Unicode times
+symbol and make a neat little delete button:
 
 ```css
 .delete:before {
@@ -451,3 +451,4 @@ delete button:
 [flask]: http://flask.pocoo.org/
 [trello]: https://trello.com/
 [dnd]: https://github.com/gaearon/react-dnd
+[content-prop]: https://developer.mozilla.org/en-US/docs/Web/CSS/content
