@@ -316,7 +316,8 @@ var TaskList = React.createClass({
 });
 ```
 
-Finally, the app component. This is just a wrapper around the others.
+Finally, the app component. This is just a wrapper around the other components
+that wraps `TaskList` components in a `div`.
 
 ```
 var App = React.createClass({
@@ -339,7 +340,7 @@ var App = React.createClass({
 ```
 
 Once the document has loaded, we ask the server for the initial state of the
-board, and render that:
+board, and render that using the `App` component:
 
 ```js
 $(document).ready(function() {
