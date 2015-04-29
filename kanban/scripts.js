@@ -67,7 +67,7 @@ var TaskDropBin = React.createClass({
       register(ItemTypes.TASK, {
         dropTarget: {
           acceptDrop: function(component, item) {
-            /* When a task is dropped, add it to the parent task list */
+            // When a task is dropped, add it to the parent task list
             item.deleteTask();
             component.props.list.addTask(item.text);
           }
