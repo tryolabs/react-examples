@@ -1,7 +1,16 @@
 import json
-
 from flask import Flask, request
+from flask.ext.cors import CORS
+
+
 app = Flask(__name__, static_url_path='', static_folder='.')
+cors = CORS(app)
+
+
+# One of the simplest configurations. Exposes all resources matching /api/* to
+# CORS and allows the Content-Type header, which is necessary to POST JSON
+# cross origin.
+CORS(app, resources=r'/api/*', allow_headers='Content-Type')
 
 
 class Task(object):
