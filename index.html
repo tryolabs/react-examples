@@ -1,0 +1,44 @@
+---
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>React Examples</title>
+    <style>
+     body {
+         font-family: sans-serif;
+     }
+
+     .container {
+         width: 300px;
+         margin: 0 auto;
+         border: 1px solid #ccc;
+         padding: 25px;
+     }
+
+     h1 {
+         text-align: center;
+     }
+
+     a {
+         text-decoration: none;
+     }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Examples:</h1>
+      <ul>
+        {% for example in site.examples %}
+          <li>
+            <a href="{{ site.baseurl }}/{{ example.url }}">{{ example.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>

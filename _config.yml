@@ -1,0 +1,9 @@
+baseurl: "/react-examples"
+
+repo: https://github.com/tryolabs/react-examples
+
+examples:
+  - name: Mailbox
+    url: mailbox
+  - name: Drag and Drop
+    url: dnd
