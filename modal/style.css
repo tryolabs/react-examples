@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    margin: 0;
+
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+}
+
+.app {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    z-index: 0;
+}
+
+h1, h3 {
+    text-align: center;
+    margin: 0 0 20px 0;
+}
+
+.modal {
+    width: 200px;
+    height: 100px;
+    padding: 20px;
+
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    margin: -70px 0 0 -120px;
+
+    border: 1px solid #ccc;
+    background: white;
+}
+
+button {
+    display: block;
+    margin: 0 auto;
+    padding: 6px 12px;
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white;
+
+    color: #0066CC;
+    font-weight: bold;
+
+    font-size: 14px;
+    line-height: 20px;
+}
+
+/* Animation */
+
+.modal-anim-enter {
+    opacity: 0.00;
+    transform: scale(0.7);
+    transition: all 0.2s;
+}
+
+.modal-anim-enter.modal-anim-enter-active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.modal-anim-leave {
+    opacity: 1;
+    transform: scale(1);
+    transition: all 0.2s;
+}
+
+.modal-anim-leave.modal-anim-leave-active {
+    opacity: 0.00;
+    transform: scale(0.7);
+}
