@@ -7,3 +7,5 @@ examples:
     url: mailbox
   - name: Drag and Drop
     url: dnd
+  - name: Modal
+    url: modal
