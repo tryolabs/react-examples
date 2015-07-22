@@ -1,0 +1,20 @@
+.icon {
+    padding-right: 10px;
+}
+
+.messages {
+  position: fixed;
+  width: 40%;
+  top: 10px;
+  left: 30%;
+  z-index: 9999;
+  text-align: center;
+}
+
+.messages .alert {
+  display: inline-block;
+}
+
+.messages .close {
+  margin-left: 10px;
+}
