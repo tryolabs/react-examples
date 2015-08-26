@@ -1,0 +1,4 @@
+build/main.js
+build/vendors.js
+node_modules/*
+

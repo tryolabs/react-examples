@@ -4,7 +4,9 @@
   "description": "A nuclearjs test",
   "main": "client/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "$(npm bin)/webpack",
+    "run": "sh run.sh"
   },
   "author": "Diego Gadola <diego@tryolabs.com>",
   "license": "ISC",
@@ -20,6 +22,7 @@
     "css-loader": "^0.15.1",
     "file-loader": "^0.8.4",
     "jquery": "^2.1.4",
+    "json-server": "^0.7.25",
     "node-libs-browser": "^0.5.2",
     "node-sass": "^3.2.0",
     "nuclear-js": "^1.0.5",
