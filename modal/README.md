@@ -16,7 +16,8 @@ want is a little more complex:
 
 ## Components
 
-First, we have to use React's CSS Transition Group component:
+First, we have to use React's
+[CSS Transition Group component](https://facebook.github.io/react/docs/animation.html):
 
 ```javascript
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
