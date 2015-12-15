@@ -101,7 +101,7 @@ Here we have the render function. We look at the component's drop state to see w
 
 * Nothing is happening.
 * A droppable object is being dragged.
-* A droppable object hsa been dragged over the component.
+* A droppable object has been dragged over the component.
 
 We use this to change the component's class name, then later we'll use CSS to
 style it.
