@@ -1,4 +1,10 @@
-var Email = React.createClass({
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import './style.css';
+import reportWebVitals from './reportWebVitals';
+import createReactClass from 'create-react-class';
+
+var Email = createReactClass({
   render: function() {
     return (
       <div className="email">
@@ -18,7 +24,7 @@ var Email = React.createClass({
   }
 });
 
-var EmailListItem = React.createClass({
+var EmailListItem = createReactClass({
   render: function() {
     return (
       <tr onClick={this.props.on_click.bind(null)}>
@@ -30,7 +36,7 @@ var EmailListItem = React.createClass({
   }
 });
 
-var EmailList = React.createClass({
+var EmailList = createReactClass({
   render: function() {
     var email_list = this.props.emails.map(function(mail) {
       return (
@@ -59,7 +65,7 @@ var EmailList = React.createClass({
   }
 });
 
-var NoneSelected = React.createClass({
+var NoneSelected = createReactClass({
   render: function() {
     return (
       <div className="none-selected alert alert-warning" role="alert">
@@ -69,7 +75,7 @@ var NoneSelected = React.createClass({
   }
 });
 
-var Mailbox = React.createClass({
+var Mailbox = createReactClass({
   getInitialState: function(){
     return { email_id: null };
   },
@@ -80,6 +86,7 @@ var Mailbox = React.createClass({
 
   render: function() {
     var email_id = this.state.email_id;
+    var selected_email;
     if (email_id) {
       var mail = this.props.emails.filter(function(mail) {
         return mail.id == email_id;
@@ -105,7 +112,7 @@ var Mailbox = React.createClass({
   }
 });
 
-var MailboxList = React.createClass({
+var MailboxList = createReactClass({
   render: function() {
     var mailbox_list = this.props.mailboxes.map(function(mailbox) {
       return (
@@ -130,7 +137,7 @@ var MailboxList = React.createClass({
   }
 });
 
-var App = React.createClass({
+var App = createReactClass({
   getInitialState: function(){
     return { mailbox_id: null };
   },
@@ -141,6 +148,7 @@ var App = React.createClass({
 
   render: function() {
     var mailbox_id = this.state.mailbox_id;
+    var selected_mailbox;
     if (mailbox_id) {
       var mailbox = this.props.mailboxes.filter(function(mailbox) {
         return mailbox.id == mailbox_id;
@@ -203,7 +211,10 @@ var fixtures = [
   }
 ];
 
-React.render(
-  <App mailboxes={fixtures} />,
-  document.body
-);
+createRoot(document.body.querySelector('#root'))
+  .render(<App mailboxes={fixtures}/>)
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
