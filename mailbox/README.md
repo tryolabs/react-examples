@@ -1,5 +1,52 @@
 # Mailbox
 
+# Plans for improving - June 2022
+
+## Codebase
+
+- Code needs to be modernized a bit
+
+	[x] We should be using a package.json to run react
+
+	[x] Create a new repo to put our work into
+
+	[x] Update Readme.md
+
+  - Classes should be transformed into hooks
+
+  - Classes should have their own files
+
+## User Stories
+
+- Users should be able to receive new emails
+
+	- Will update EmailList component
+
+	- Communicate with server when component loads and grab all emails for user
+
+	- Render email data dynamically
+
+- User should be able to create and send an email
+
+	- Need a button in a new component to create new email
+
+	- Box will popup
+
+	- Input for to & subject 
+
+	- Body Editable text component
+
+	- send button
+
+	- Sends email to person in to field
+
+- User should  be able to tell the difference Normal Email from Spam Email
+
+- Users should be able to search through their inboxes
+
+- Users should be able to delete emails
+
+
 ![Screenshot](img/screenshot.png)
 
 The app we want to design is basically a React clone of the email client in

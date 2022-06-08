@@ -1,5 +1,11 @@
-var Email = React.createClass({
-  render: function() {
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import './style.css';
+import reportWebVitals from './reportWebVitals';
+import createReactClass from 'create-react-class';
+
+var Email = createReactClass({
+  render: function () {
     return (
       <div className="email">
         <dl className="meta dl-horizontal">
@@ -12,14 +18,14 @@ var Email = React.createClass({
           <dt>Subject</dt>
           <dd>{this.props.subject}</dd>
         </dl>
-        <div className="body" dangerouslySetInnerHTML={{__html: this.props.body}}></div>
+        <div className="body" dangerouslySetInnerHTML={{ __html: this.props.body }}></div>
       </div>
     );
   }
 });
 
-var EmailListItem = React.createClass({
-  render: function() {
+var EmailListItem = createReactClass({
+  render: function () {
     return (
       <tr onClick={this.props.on_click.bind(null)}>
         <td>{this.props.subject}</td>
@@ -30,15 +36,15 @@ var EmailListItem = React.createClass({
   }
 });
 
-var EmailList = React.createClass({
-  render: function() {
-    var email_list = this.props.emails.map(function(mail) {
+var EmailList = createReactClass({
+  render: function () {
+    var email_list = this.props.emails.map(function (mail) {
       return (
         <EmailListItem key={mail.id}
-                       from={mail.from}
-                       to={mail.to}
-                       subject={mail.subject}
-                       on_click={this.props.onSelectEmail.bind(null, mail.id)} />
+          from={mail.from}
+          to={mail.to}
+          subject={mail.subject}
+          on_click={this.props.onSelectEmail.bind(null, mail.id)} />
       );
     }.bind(this));
 
@@ -59,8 +65,8 @@ var EmailList = React.createClass({
   }
 });
 
-var NoneSelected = React.createClass({
-  render: function() {
+var NoneSelected = createReactClass({
+  render: function () {
     return (
       <div className="none-selected alert alert-warning" role="alert">
         <span>No {this.props.text} selected.</span>
@@ -69,26 +75,27 @@ var NoneSelected = React.createClass({
   }
 });
 
-var Mailbox = React.createClass({
-  getInitialState: function(){
+var Mailbox = createReactClass({
+  getInitialState: function () {
     return { email_id: null };
   },
 
-  handleSelectEmail: function(id) {
+  handleSelectEmail: function (id) {
     this.setState({ email_id: id });
   },
 
-  render: function() {
+  render: function () {
     var email_id = this.state.email_id;
+    var selected_email;
     if (email_id) {
-      var mail = this.props.emails.filter(function(mail) {
+      var mail = this.props.emails.filter(function (mail) {
         return mail.id == email_id;
       })[0];
       selected_email = <Email id={mail.id}
-                              from={mail.from}
-                              to={mail.to}
-                              subject={mail.subject}
-                              body={mail.body} />;
+        from={mail.from}
+        to={mail.to}
+        subject={mail.subject}
+        body={mail.body} />;
     } else {
       selected_email = <NoneSelected text="email" />;
     }
@@ -96,7 +103,7 @@ var Mailbox = React.createClass({
     return (
       <div>
         <EmailList emails={this.props.emails}
-                   onSelectEmail={this.handleSelectEmail} />
+          onSelectEmail={this.handleSelectEmail} />
         <div className="email-viewer">
           {selected_email}
         </div>
@@ -105,13 +112,13 @@ var Mailbox = React.createClass({
   }
 });
 
-var MailboxList = React.createClass({
-  render: function() {
-    var mailbox_list = this.props.mailboxes.map(function(mailbox) {
+var MailboxList = createReactClass({
+  render: function () {
+    var mailbox_list = this.props.mailboxes.map(function (mailbox) {
       return (
         <li className="list-group-item"
-            key={mailbox.id}
-            onClick={this.props.onSelectMailbox.bind(null, mailbox.id)}>
+          key={mailbox.id}
+          onClick={this.props.onSelectMailbox.bind(null, mailbox.id)}>
           <span className="badge">
             {mailbox.emails.length}
           </span>
@@ -124,37 +131,39 @@ var MailboxList = React.createClass({
       <div className="col-md-2">
         <ul className="mailboxes list-group">
           {mailbox_list}
+          <button>Compose</button>
         </ul>
       </div>
     );
   }
 });
 
-var App = React.createClass({
-  getInitialState: function(){
+var App = createReactClass({
+  getInitialState: function () {
     return { mailbox_id: null };
   },
 
-  handleSelectMailbox: function(id) {
+  handleSelectMailbox: function (id) {
     this.setState({ mailbox_id: id });
   },
 
-  render: function() {
+  render: function () {
     var mailbox_id = this.state.mailbox_id;
+    var selected_mailbox;
     if (mailbox_id) {
-      var mailbox = this.props.mailboxes.filter(function(mailbox) {
+      var mailbox = this.props.mailboxes.filter(function (mailbox) {
         return mailbox.id == mailbox_id;
       })[0];
       selected_mailbox = <Mailbox key={mailbox.id}
-                                  emails={mailbox.emails} />;
+        emails={mailbox.emails} />;
     } else {
       selected_mailbox = <NoneSelected text="mailbox" />;
     }
 
     return (
-      <div className="app row">
-        <MailboxList mailboxes={this.props.mailboxes}
-                     onSelectMailbox={this.handleSelectMailbox} />
+        <div className="app row">
+          <MailboxList mailboxes={this.props.mailboxes}
+            onSelectMailbox={this.handleSelectMailbox} />    
         <div className="mailbox col-md-10">
           <div className="panel panel-default">
             <div className="panel-body">
@@ -203,7 +212,10 @@ var fixtures = [
   }
 ];
 
-React.render(
-  <App mailboxes={fixtures} />,
-  document.body
-);
+createRoot(document.body.querySelector('#root'))
+  .render(<App mailboxes={fixtures} />)
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
